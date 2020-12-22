@@ -1,6 +1,7 @@
+import React from 'react';
 import { graphql } from 'gatsby';
 
-const Post = ({ data }) => {
+export default function Post({ data }) {
   const { frontmatter, html } = data.markdownRemark
   return (
     <div className="blogpost-container">
@@ -15,18 +16,15 @@ const Post = ({ data }) => {
   )
 };
 
-const postQuery = graphql`
+export const postQuery = graphql`
   query($slug: String!) {
     markdownRemark(frontmatter: {slug: { eq: $slug }}) {
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date
         slug
         title
       }
     }
   }
 `
-
-export default Post;
-export const PageQuery;

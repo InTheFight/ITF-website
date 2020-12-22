@@ -66,6 +66,13 @@ module.exports = {
         path: `${__dirname}/posts/`,
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'resources',
+        path: `${__dirname}/resources/`,
+      },
+    },
     'gatsby-transformer-remark',
     {
       resolve: 'gatsby-plugin-mailchimp',
