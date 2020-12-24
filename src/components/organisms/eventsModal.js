@@ -73,7 +73,7 @@ const VirtualContainer = styled.div`
       padding-top: 4px;
     }
   }
-`
+`;
 
 const EventsModal = ({ isOpen, onRequestClose, title, description, date, location, virtual }) => {
   const styles = {

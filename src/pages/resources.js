@@ -11,15 +11,15 @@ const Resources = ({ data }) => {
   return (
     <Layout>
       <ul>
-      {resourcesData.map((resource) => {
-        const { id, frontmatter} = resource.node;
-        const url = makeSlug(resource.node, "resources")
-        return (
-          <div key={id}>
-            <LinksItem url={url} text={frontmatter.title} />
-          </div>
-        );
-      })}
+        {resourcesData.map((resource) => {
+          const { id, frontmatter } = resource.node;
+          const url = makeSlug(resource.node, 'resources');
+          return (
+            <div key={id}>
+              <LinksItem url={url} text={frontmatter.title} />
+            </div>
+          );
+        })}
       </ul>
     </Layout>
   );
