@@ -4,22 +4,7 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-
-function makeSlug(node) {
-  function urlizePath(p) {
-    // Trim directories   ---     drop file extension --- replace whitespace with dashes
-    return p.replace(RegExp("/.*/"), "").replace(/\.[^.]*$/, "").replace(/[\W]/g,'-')
-  }
-
-  if (node.frontmatter.slug) {
-    return node.frontmatter.slug
-  }
-  else {
-    // TODO remove after development
-    console.log(node)
-    return urlizePath(node.fileAbsolutePath)
-  }
-}
+const { makeSlug } = require('./src/lib/utils')
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
@@ -36,6 +21,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           node {
             id
             frontmatter {
+              title
               slug
             }
             fileAbsolutePath
@@ -67,8 +53,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
+
+  function resourcePaths(n) { makeSlug(n, "resources") }
+
   resources.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const slug = makeSlug(node)
+    const slug = makeSlug(node,"resources")
     createPage({
       path: slug,
       component: resourceTemplate,

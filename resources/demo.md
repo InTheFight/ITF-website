@@ -1,3 +1,8 @@
+---
+title: Engaging title
+description: A demo resource
+---
+
 Resources Test
 ===============
 

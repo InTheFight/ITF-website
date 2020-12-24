@@ -2,23 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
+import { makeSlug } from '../lib/utils';
 import Layout from '../components/templates/layout';
-import Title from '../components/atoms/title';
+import LinksItem from '../components/atoms/listItem';
 
 const Resources = ({ data }) => {
-  const resourcesData = data.allContentfulResources.edges;
-
+  const resourcesData = data.allMarkdownRemark.edges;
   return (
     <Layout>
+      <ul>
       {resourcesData.map((resource) => {
-        const { id, title } = resource.node;
-
+        const { id, frontmatter} = resource.node;
+        const url = makeSlug(resource.node, "resources")
         return (
           <div key={id}>
-            <Title text={title} />
+            <LinksItem url={url} text={frontmatter.title} />
           </div>
         );
       })}
+      </ul>
     </Layout>
   );
 };
@@ -30,16 +32,20 @@ Resources.propTypes = {
 export default Resources;
 
 export const resourcesQuery = graphql`
-  query MyQuery {
-    allContentfulResources {
-      edges {
-        node {
-          description {
-            description
+    query ResourcesQuery {
+      allMarkdownRemark(
+         filter: {fileAbsolutePath: {glob: "**/resources/*"}}
+      ) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              slug
+            }
+            fileAbsolutePath
           }
-          title
         }
       }
     }
-  }
-`;
+  `;
