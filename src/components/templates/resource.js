@@ -20,7 +20,9 @@ export default function Resource({ data }) {
 }
 
 Resource.propTypes = {
-  data: PropTypes.objectOf(PropTypes.object()).isRequired,
+/* eslint-disable react/forbid-prop-types */
+  data: PropTypes.object.isRequired,
+/* eslint-disable react/forbid-prop-types */
 };
 
 export const resourceQuery = graphql`
