@@ -67,7 +67,7 @@ const Endorsements = ({ data }) => {
 
   return (
     <Layout>
-      <Title text="Endorsement Questionaire"></Title>
+      <Title text="Endorsement Questionnaire"></Title>
       <Form>
         <Label>
           <div>Candidate's Full Name</div>
@@ -206,7 +206,7 @@ const Endorsements = ({ data }) => {
         </Label>
         <Label>
           <div>What is your greatest strength and greatest weakness as a candidate?</div>
-          <Input type="text" name="strength" onChange="" />
+          <TextArea rows="10" name="strength" onChange="" />
         </Label>
         <Label>
           <div>What are your top 3 priorities or policies you hope to accomplish in this term of office? Please be realistic about the scope of the office.</div>
@@ -229,7 +229,7 @@ const Endorsements = ({ data }) => {
           <TextArea rows="10" name="justice" onChange="" />
         </Label>
         <ButtonContainer>
-          <Button text="Request Endorsement" color="purple" />
+          <Button text="Submit" color="purple" />
         </ButtonContainer>
       </Form>
     </Layout>
