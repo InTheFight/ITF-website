@@ -26,13 +26,17 @@ const Form = styled.form`
   }
 `;
 
-const QuestionaireTitle = styled.h1`
+const QuestionnaireTitle = styled.h1`
   margin: 1em 0 0 100px;
   text-align: center;
 `
 const Input = styled.input`
   font-size: large;
   height: 27px;
+  width: 600px;
+`;
+const TextArea = styled.textarea`
+  font-size: large;
   width: 600px;
 `;
 
@@ -146,7 +150,7 @@ const Endorsements = ({ data }) => {
         {/* TODO: a checkbox/button thing w/ all the parties */}
         {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
         <Label>
-          <div>Chceck all of the party lines you are seeking, including any "non-official party lines"</div>
+          <div>Check all of the party lines you are seeking, including any "non-official party lines"</div>
           <Input type="text" name="partyLines" onChange="" />
         </Label>
         {/* TODO: yes/no radio */}
@@ -175,30 +179,30 @@ const Endorsements = ({ data }) => {
             <p>Tell us about who you are and why you are running. Include your core values and vision.</p>
             <p>What are the biggest challenges facing the district you hope to repersent? What needs to happen for those to be resolved?</p>
           </div>
-          <Input type="text" name="vision" onChange="" />
+          <TextArea rows="10" name="vision" onChange="" />
         </Label>
         <Label>
           <div>How will you engage with diverse groups across the district you hope to represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.</div>
-          <Input type="text" name="engagement" onChange="" />
+          <TextArea rows="10" name="engagement" onChange="" />
         </Label>
         <Label>
           <div>Have you run for office previously? If so, please provide details.</div>
-          <Input type="text" name="priorRuns" onChange="" />
+          <TextArea rows="5" name="priorRuns" onChange="" />
         </Label>
         {/* TODO: Make list */}
         <Label>
           <div>Please list other endorsements you have earned, especially from unions, progressive organizations, and progressive elected officials.</div>
-          <Input type="text" name="endorsement" onChange="" />
+          <TextArea rows="5" name="endorsement" onChange="" />
         </Label>
         <Label>
           <div>What civic and political organizations are you involved with in the city?
 
           If we called them up, what would they tell us about you?</div>
-          <Input type="text" name="orgs" onChange="" />
+          <TextArea rows="10" name="orgs" onChange="" />
         </Label>
         <Label>
           <div>What would your best friends say about you?</div>
-          <Input type="text" name="friends" onChange="" />
+          <TextArea rows="10" name="friends" onChange="" />
         </Label>
         <Label>
           <div>What is your greatest strength and greatest weakness as a candidate?</div>
@@ -206,15 +210,15 @@ const Endorsements = ({ data }) => {
         </Label>
         <Label>
           <div>What are your top 3 priorities or policies you hope to accomplish in this term of office? Please be realistic about the scope of the office.</div>
-          <Input type="text" name="priorities" onChange="" />
+          <TextArea rows="10" name="priorities" onChange="" />
         </Label>
         <Label>
-          <div>Why do you want In The Fight NBK's endorsements?</div>
-          <Input type="text" name="itflovel" onChange="" />
+          <div>Why do you want In The Fight NBK's endorsement?</div>
+          <TextArea rows="10" name="itflovel" onChange="" />
         </Label>
         <Label>
           <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
-          <Input type="text" name="itfMembers" onChange="" />
+          <TextArea rows="5" name="itfMembers" onChange="" />
         </Label>
         <Label>
           <div>
@@ -222,7 +226,7 @@ const Endorsements = ({ data }) => {
                economic and gender justice and equity?</p>
             <p>Please provide examples showing this work.</p>
           </div>
-          <Input type="text" name="justice" onChange="" />
+          <TextArea rows="10" name="justice" onChange="" />
         </Label>
         <ButtonContainer>
           <Button text="Request Endorsement" color="purple" />
