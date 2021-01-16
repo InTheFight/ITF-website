@@ -1,94 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
-import styled from 'styled-components';
 
-import EventsModal from '../components/organisms/eventsModal';
 import Title from '../components/atoms/title';
-import DateField from '../components/atoms/dateField';
-import Location from '../components/atoms/location';
 import Layout from '../components/templates/layout';
 import Button from '../components/atoms/button';
+import FormElement from '../components/organisms/FormElement';
 
-// TODO: Required form elements
-// TODO: Identify required?
-// TODO: Show/hide incumbent when applicable (etc)?
-const Form = styled.form`
-  color: '#2C358F';
-  display: flex;
-  flex-direction: column;
-  font-size: 30px;
-  margin: 40px 0px 0px 95px;
+import {
+  Form,
+  QuestionnaireTitle,
+  Input,
+  TextArea,
+  Label,
+  ButtonContainer,
+  Other,
+  Select,
+  VirtualText,
+  CheckboxLabel,
+  Checkbox,
+  Checkboxes,
+  Legend
+} from '../styles/form-styles';
+import { createClient } from 'contentful-management'
 
-  & div {
-    width: 500px;
-    margin-bottom: 5px;
-  }
-`;
-
-const QuestionnaireTitle = styled.h1`
-  margin: 1em 0 0 100px;
-  text-align: center;
-`
-const Input = styled.input`
-  font-size: large;
-  height: 27px;
-  width: 600px;
-`;
-const TextArea = styled.textarea`
-  font-size: large;
-  width: 600px;
-`;
-
-const Label = styled.label`
-  display: flex;
-  font-size: medium;
-  flex-direction: column;
-  margin: 10px 0 10px 0;
-`;
-
-const ButtonContainer = styled.div`
-  margin-top: inherit;
-
-  & input {
-    margin-left: 110px;
-    width: 500px !important;
-  }
-`;
-
-const Other = (selected) => {
-
-}
-
-const Select = styled.select`
-  font-size: medium;
-  width 360px;
-`;
-
-const VirtualText = styled.p`
-  font-weight: bold;
-  margin: 10px;
-`;
-
-const CheckboxLabel = styled.label`
-  font-size: small;
-  margin: 10px 40px 10px 0;
-`;
-
-const Checkbox = styled.input`
-  font-size: medium;
-  margin-left: 10px;
-`;
-
-const Checkboxes = styled.fieldset`
-  display: flex
-  flex-direction: row;
-`
-
-const Legend = styled.legend`
-  font-size: medium;
-  margin: 10px 40px 10px 0;
-`
 const parties =
       { Democratic: "Democratic",
         Republican: "Republican",
@@ -101,39 +35,91 @@ const parties =
         Other: "Other",
       }
 
-const LinesSought = (props) => {
+const LinesSought = ({ legend, setField }) => {
   return (
     <Checkboxes>
-      <Legend>{props.legend}</Legend>
+      <Legend>{legend}</Legend>
       {Object.entries(parties).map(([k,v]) =>
             <CheckboxLabel>
               <span>{v}</span>
-              <Checkbox type="checkbox" name={k} onChange="" />
+              <Checkbox type="checkbox" name={k} onChange={setField} />
             </CheckboxLabel>)}
     </Checkboxes>
   )
 }
 
-const Endorsements = ({ data }) => {
+const Endorsements = () => {
+  const [name, setName] = useState('')
+  const [pronouns, setPronouns] = useState('')
+  const [electionDate, setElectionDate] = useState('')
+  const [vision, setVision] = useState('')
+  const [linesSought, setLinesSought] = useState({})
+
+  const client = createClient({
+    accessToken: process.env.CONTENTFUL_MANAGEMENT_API_KEY,
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    client.getSpace(process.env.SPACE_ID)
+    .then((space) => space.getEnvironment('master'))
+    .then((environment) => environment.createEntry('candidateQuestionnaires', {
+      fields: {
+        fullName: {
+          'en-US': name
+        },
+        pronouns: {
+          'en-US': pronouns
+        },
+        electionDate: {
+          'en-US': electionDate
+        },
+        vision: {
+          'en-US': vision
+        },
+        linesSought: lineSought
+      }
+    }))
+    .then((entry) => console.log(entry))
+    .catch(console.error)
+  }
+
+  const setField = (event) => {
+    const {name, value } = event.target
+
+    if (name === "fullName") {
+      setName(value)
+    } else if (name === "pronouns") {
+      setPronouns(value)
+    } else if (name === "electionDate") {
+      setElectionDate(value)
+    } else if (name === "vision") {
+      setVision(value)
+    } else if (Object.keys(parties).includes(name)) {
+      // setLinesSought(Object.assign(k:v)) 
+    }
+  }
+
   return (
     <Layout>
       <Title text="Endorsement Questionnaire"></Title>
-      <Form>
-        <Label>
-          <div>Candidate's Full Name</div>
-          <Input type="text" name="name" onChange="" />
-        </Label>
+      <Form onSubmit={handleSubmit}>
+        <FormElement
+          label="Candidate's Full Name"
+          name="fullName"
+          setField={setField}
+        />
         <Label>
           <div>Candidate's Pronouns</div>
-          <Input type="text" name="name" onChange="" />
+          <Input type="text" name="pronouns" onChange={setField} />
         </Label>
         <Label>
           <div>Election / Primary Date</div>
-          <Input type="date" name="electionDate" onChange="" />
+          <Input type="date" name="electionDate" onChange={setField} />
         </Label>
         <Label>
           <div>Current Office / Occupation</div>
-          <Input type="text" name="occupation" onChange="" />
+          <Input type="text" name="occupation" onChange={""} />
         </Label>
         <Label>
           <div>Preferred Campaign Point of Contact (Name)</div>
@@ -205,7 +191,9 @@ const Endorsements = ({ data }) => {
         </Label>
         {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
         <LinesSought
-          legend='Check all of the party lines you are seeking, including any "non-official party lines"' />
+          legend='Check all of the party lines you are seeking, including any "non-official party lines"'
+          setField={setField}
+        />
         {/* TODO: yes/no radio */}
         <Label>
           <div>Are you an incumbent?</div>
@@ -232,7 +220,7 @@ const Endorsements = ({ data }) => {
             <p>Tell us about who you are and why you are running. Include your core values and vision.</p>
             <p>What are the biggest challenges facing the district you hope to repersent? What needs to happen for those to be resolved?</p>
           </div>
-          <TextArea rows="10" name="vision" onChange="" />
+          <TextArea rows="10" name="vision" onChange={setField} />
         </Label>
         <Label>
           <div>How will you engage with diverse groups across the district you hope to represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.</div>

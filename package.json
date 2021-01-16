@@ -6,6 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.11.1",
+    "contentful-management": "^7.5.1",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
