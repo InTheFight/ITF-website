@@ -10,9 +10,9 @@ export default function Resource({ data }) {
         <h1>{frontmatter.title}</h1>
         <div
           className="resource-content"
-/* eslint-disable react/no-danger */
+          /* eslint-disable react/no-danger */
           dangerouslySetInnerHTML={{ __html: html }}
-/* eslint-enabale react/no-danger */
+          /* eslint-enabale react/no-danger */
         />
       </div>
     </div>
