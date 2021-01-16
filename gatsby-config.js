@@ -17,8 +17,8 @@ module.exports = {
         url: '/events',
       },
       {
-        name: 'Blogs',
-        url: '/blogs',
+        name: 'Blog',
+        url: '/blog',
       },
       {
         name: 'Resources',
@@ -47,7 +47,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/logos/ITF-logo.png'
+        icon: `${__dirname}/src/images/logos/ITF-logo.png`,
       },
     },
     {
@@ -82,3 +82,4 @@ module.exports = {
     }
   ],
 };
+

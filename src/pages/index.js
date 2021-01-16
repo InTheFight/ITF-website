@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
-import Layout from '../components/templates/layout';
+import Layout from '../templates/layout';
 import HomePageLogo from '../components/molecules/homePageLogo';
 import BottomSection from '../components/organisms/BottomSection';
 import HomeHeadlineSection from '../components/organisms/HomeHeadlineSection';

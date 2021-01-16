@@ -7,7 +7,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 import DateField from '../components/atoms/dateField';
 import Location from '../components/atoms/location';
-import Layout from '../components/templates/layout';
+import Layout from '../templates/layout';
 import Button from '../components/atoms/button';
 import logo from '../images/logos/ITF-home-logo.png';
 

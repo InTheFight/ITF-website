@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../components/templates/layout';
+import Layout from '../templates/layout';
 
 const ContactUs = () => (
   <>

@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { createClient } from 'contentful-management';
 /* eslint-disable import/no-unresolved */
 
-import Layout from '../components/templates/layout';
+import Layout from '../templates/layout';
 import Button from '../components/atoms/button';
 import LinesSought from '../components/molecules/LinesSought';
 import Bool from '../components/molecules/Bool';
