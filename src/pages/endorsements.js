@@ -203,7 +203,6 @@ const Endorsements = ({ data }) => {
           <div>District Number, if applicable</div>
           <Input type="number" name="districtNumber" onChange="" />
         </Label>
-        {/* TODO: a checkbox/button thing w/ all the parties */}
         {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
         <LinesSought
           legend='Check all of the party lines you are seeking, including any "non-official party lines"' />
