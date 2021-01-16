@@ -56,15 +56,65 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const Other = (selected) => {
+
+}
+
+const Select = styled.select`
+  font-size: medium;
+  width 360px;
+`;
 
 const VirtualText = styled.p`
   font-weight: bold;
   margin: 10px;
 `;
 
+const CheckboxLabel = styled.label`
+  font-size: small;
+  margin: 10px 40px 10px 0;
+`;
+
+const Checkbox = styled.input`
+  font-size: medium;
+  margin-left: 10px;
+`;
+
+const Checkboxes = styled.fieldset`
+  display: flex
+  flex-direction: row;
+`
+
+const Legend = styled.legend`
+  font-size: medium;
+  margin: 10px 40px 10px 0;
+`
+const parties =
+      { Democratic: "Democratic",
+        Republican: "Republican",
+        Conservative: "Conservative",
+        Independence: "Independence",
+        Green: "Green",
+        Libertarian: "Libertarian",
+        SAM: "SAM",
+        Working_Families_Party: "Working Families Party",
+        Other: "Other",
+      }
+
+const LinesSought = (props) => {
+  return (
+    <Checkboxes>
+      <Legend>{props.legend}</Legend>
+      {Object.entries(parties).map(([k,v]) =>
+            <CheckboxLabel>
+              <span>{v}</span>
+              <Checkbox type="checkbox" name={k} onChange="" />
+            </CheckboxLabel>)}
+    </Checkboxes>
+  )
+}
 
 const Endorsements = ({ data }) => {
-
   return (
     <Layout>
       <Title text="Endorsement Questionnaire"></Title>
@@ -86,21 +136,35 @@ const Endorsements = ({ data }) => {
           <Input type="text" name="occupation" onChange="" />
         </Label>
         <Label>
-          <div>Candidate's Personal Email</div>
+          <div>Preferred Campaign Point of Contact (Name)</div>
+          <Input type="text" name="contactName" onChange="" />
+        </Label>
+        <Label>
+          <div>Preferred Campaign Point of Contact (Role)</div>
+          <Input type="text" name="contactRole" onChange="" />
+        </Label>
+        <Label>
+          <div>Preferred Campaign Point of Contact (Email)</div>
           <Input type="email" name="email" onChange="" />
         </Label>
         <Label>
-          <div>Candidate's Cell</div>
-          <Input type="tel" name="candiadteCell" onChange="" />
-        </Label>
-        <Label>
-          <div>Zip Code</div>
-          <Input type="text" name="candidateZip" onChange="" />
+          <div>Preferred Campaign Point of Contact (Phone Number)</div>
+          <Input type="tel" name="phone" onChange="" />
         </Label>
         {/* TODO: make this a select list  */}
         <Label>
           <div>In which political party are you currently registered?</div>
-          <Input type="text" name="party" onChange="" />
+          <Select name="party">
+            <option value="Democratic">Democratic</option>
+            <option value="Republican">Republican</option>
+            <option value="Conservative">Conservative</option>
+            <option value="Independence">Independence</option>
+            <option value="Green">Green</option>
+            <option value="Libertarian">Libertarian</option>
+            <option value="SAM">SAM</option>
+            <option value="Working_Families_Party">Working Families Party</option>
+            <option value="Other">Other</option>
+          </Select>
         </Label>
         <Label>
           <div>Name of Your Campaign Commitee</div>
@@ -113,14 +177,6 @@ const Endorsements = ({ data }) => {
         <Label>
           <div>Campaign Zip</div>
           <Input type="text" name="campaignZip" onChange="" />
-        </Label>
-        <Label>
-          <div>Campaign Manager / Point of Contact Name</div>
-          <Input type="text" name="contactName" onChange="" />
-        </Label>
-        <Label>
-          <div>Campaign Manager / Point of Contact Email</div>
-          <Input type="email" name="contactEmail" onChange="" />
         </Label>
         <Label>
           <div>Campaign Website</div>
@@ -149,10 +205,8 @@ const Endorsements = ({ data }) => {
         </Label>
         {/* TODO: a checkbox/button thing w/ all the parties */}
         {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
-        <Label>
-          <div>Check all of the party lines you are seeking, including any "non-official party lines"</div>
-          <Input type="text" name="partyLines" onChange="" />
-        </Label>
+        <LinesSought
+          legend='Check all of the party lines you are seeking, including any "non-official party lines"' />
         {/* TODO: yes/no radio */}
         <Label>
           <div>Are you an incumbent?</div>
