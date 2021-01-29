@@ -64,21 +64,30 @@ const Bool = ({name, setField}) => {
 // Modify a simple key-value mapping into the format Contentful needs
 function contentfulize(obj) {
 
-  const result = {}
+  const result = {
+    linesSought: { 
+      'en-US': {
+        parties: []
+      } 
+    }
+  }
 
   Object.entries(obj).map(([k,v]) => {
     const skipReformat = ["incumbent", "challenger"]
+    const partyFields = Object.keys(parties)
     if (skipReformat.includes(k)) {
-      const field = Object.fromEntries([[k,v]])
+      const field = Object.fromEntries([[k, { 'en-US': v }]])
       Object.assign(result, field)
-
+    } else if(partyFields.includes(k)) {
+      if (v == "on") {
+        result.linesSought['en-US'].parties.push(k)
+      }
     } else { // Text fields
-      const field = Object.fromEntries([[k,{'en-US': v}]])
+      const field = Object.fromEntries([[k, { 'en-US': v }]])
       Object.assign(result, field)
     }
   })
-
-  return {fields: result}
+  return { fields: result }
 }
 
 const Endorsements = () => {
@@ -98,7 +107,7 @@ const Endorsements = () => {
    }
 
   const setField = (event) => {
-    const {name, value } = event.target
+    const { name, value } = event.target
 
     if (name === 'linesSought') {
 
@@ -250,7 +259,7 @@ const Endorsements = () => {
         {/* TODO: Make list */}
         <Label>
           <div>Please list other endorsements you have earned, especially from unions, progressive organizations, and progressive elected officials.</div>
-          <TextArea rows="5" name="endorsement" onChange={setField} />
+          <TextArea rows="5" name="endorsements" onChange={setField} />
         </Label>
         <Label>
           <div>What civic and political organizations are you involved with in the city?
@@ -272,7 +281,7 @@ const Endorsements = () => {
         </Label>
         <Label>
           <div>Why do you want In The Fight NBK's endorsement?</div>
-          <TextArea rows="10" name="itflovel" onChange={setField} />
+          <TextArea rows="10" name="itfLove" onChange={setField} />
         </Label>
         <Label>
           <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
