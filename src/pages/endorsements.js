@@ -250,7 +250,7 @@ const Endorsements = () => {
         {/* TODO: Make list */}
         <Label>
           <div>Please list other endorsements you have earned, especially from unions, progressive organizations, and progressive elected officials.</div>
-          <TextArea rows="5" name="endorsement" onChange={setField} />
+          <TextArea rows="5" name="endorsements" onChange={setField} />
         </Label>
         <Label>
           <div>What civic and political organizations are you involved with in the city?
@@ -272,7 +272,7 @@ const Endorsements = () => {
         </Label>
         <Label>
           <div>Why do you want In The Fight NBK's endorsement?</div>
-          <TextArea rows="10" name="itflovel" onChange={setField} />
+          <TextArea rows="10" name="itfLove" onChange={setField} />
         </Label>
         <Label>
           <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
