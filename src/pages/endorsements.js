@@ -48,13 +48,29 @@ const LinesSought = ({ legend, setField }) => {
   )
 }
 
+const Bool = ({name, setField}) => {
+  return (
+    <div>
+      <Label for={name+"_yes"} ><span>Yes</span>
+        <Input type="radio" name={name} id={name+"_yes"} value="yes" onChange={setField} />
+      </Label>
+      <Label for={name+"_no"} ><span>No</span>
+        <Input type="radio" name={name} if={name+"_no"} value="no" onChange={setField} />
+      </Label>
+    </div>
+  )
+
+}
 // Modify a simple key-value mapping into the format Contentful needs
 function contentfulize(obj) {
 
   const result = {}
 
   Object.entries(obj).map(([k,v]) => {
-    if (k === 'noneyet') {
+    const skipReformat = ["incumbent", "challenger"]
+    if (skipReformat.includes(k)) {
+      const field = Object.fromEntries([[k,v]])
+      Object.assign(result, field)
 
     } else { // Text fields
       const field = Object.fromEntries([[k,{'en-US': v}]])
@@ -74,7 +90,6 @@ const Endorsements = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    debugger
     client.getSpace(process.env.SPACE_ID)
     .then((space) => space.getEnvironment('master'))
     .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
@@ -85,12 +100,16 @@ const Endorsements = () => {
   const setField = (event) => {
     const {name, value } = event.target
 
-    const fieldVal = Object.fromEntries([[name, value]])
-
     if (name === 'linesSought') {
 
+    } else if (name === 'incumbent' || name === 'challenger') {
+      const fieldVal = Object.fromEntries([[name, value === "yes"]])
+      setQuestionnaire(Object.assign(questionnaire, fieldVal))
+
     } else {
-        setQuestionnaire(Object.assign(questionnaire, fieldVal))
+
+      const fieldVal = Object.fromEntries([[name, value]])
+      setQuestionnaire(Object.assign(questionnaire, fieldVal))
     }
 
     // } else if (Object.keys(parties).includes(name)) {
@@ -195,11 +214,11 @@ const Endorsements = () => {
         {/* TODO: yes/no radio */}
         <Label>
           <div>Are you an incumbent?</div>
-          <Input type="boolean" name="incumbent" onChange={setField} />
+          <Bool name="incumbent" setField={setField} />
         </Label>
         <Label>
           <div>Are you challenging an incumbent?</div>
-          <Input type="boolean" name="challenger" onChange={setField} />
+          <Bool name="challenger" setField={setField} />
         </Label>
         <Label>
           <div>Name of incumbent (if applicable)</div>
