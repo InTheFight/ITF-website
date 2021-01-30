@@ -17,14 +17,21 @@ export const Form = styled.form`
 `;
 
 export const QuestionnaireTitle = styled.h1`
-  margin: 1em 0 0 100px;
-  text-align: center;
-`
+  margin-left: 92px;
+`;
 export const Input = styled.input`
   font-size: large;
   height: 27px;
   width: 600px;
 `;
+
+export const NumberInput = styled.input`
+  font-size: large;
+  height: 27px;
+  width: 600px;
+  -moz-appearance: textfield;
+`;
+
 export const TextArea = styled.textarea`
   font-size: large;
   width: 600px;
@@ -37,18 +44,13 @@ export const Label = styled.label`
   margin: 10px 0 10px 0;
 `;
 
-export const ButtonContainer = styled.div`
+export const FormButtonContainer = styled.div`
   margin-top: inherit;
 
   & input {
-    margin-left: 110px;
-    width: 500px !important;
+    width: 615px !important;
   }
 `;
-
-export const Other = (selected) => {
-
-}
 
 export const Select = styled.select`
   font-size: medium;
@@ -65,6 +67,12 @@ export const CheckboxLabel = styled.label`
   margin: 10px 40px 10px 0;
 `;
 
+export const CheckboxContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-left: 15px;
+`;
+
 export const Checkbox = styled.input`
   font-size: medium;
   margin-left: 10px;
@@ -73,9 +81,26 @@ export const Checkbox = styled.input`
 export const Checkboxes = styled.fieldset`
   display: flex
   flex-direction: row;
-`
+  width: 600px;
+  border: none;
+  margin-left: -25px;
+  margin-top: 20px;
+`;
 
 export const Legend = styled.legend`
   font-size: medium;
   margin: 10px 40px 10px 0;
-`
+`;
+
+export const RadioLabelYes = styled.label`
+  display: flex
+  flex-direction: row;
+`;
+export const RadioLabelNo = styled.label`
+  display: flex
+  flex-direction: row;
+  margin-left: 20px;
+`;
+export const RadioInput = styled.input`
+  width: 20px;
+`;
