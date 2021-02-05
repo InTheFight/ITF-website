@@ -1,0 +1,24 @@
+*** node_modules/contentful-management/dist/es-modules/plain/endpoints/app-definition.js	1985-10-26 04:15:00.000000000 -0400
+--- app-definition.js	2021-02-05 10:56:15.400280991 -0500
+***************
+*** 11,16 ****
+--- 11,17 ----
+  import * as raw from './raw';
+  import copy from 'fast-copy';
+  import { normalizeSelect } from './utils';
++ import 'regenerator-runtime/runtime';
+  
+  var getBaseUrl = function getBaseUrl(params) {
+    return "/organizations/".concat(params.organizationId, "/app_definitions");
+***************
+*** 64,67 ****
+  }();
+  export var del = function del(http, params) {
+    return raw.del(http, getAppDefinitionUrl(params));
+! };
+\ No newline at end of file
+--- 65,68 ----
+  }();
+  export var del = function del(http, params) {
+    return raw.del(http, getAppDefinitionUrl(params));
+! };
