@@ -6,6 +6,13 @@
 
 const { makeSlug } = require('./src/lib/utils')
 
+
+console.log("gatsby-node env" + process.env.SPACE_ID);
+
+const tokens = {
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+}
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const resourceTemplate = require.resolve(`./src/components/templates/resource.js`)
