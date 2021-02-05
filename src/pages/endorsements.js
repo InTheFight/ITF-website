@@ -64,12 +64,12 @@ const Endorsements = () => {
   console.log(process.env.CONTENTFUL_MANGAGEMENT_API_KEY);
 
   const client = createClient({
-    accessToken: process.env.CONTENTFUL_MANAGEMENT_API_KEY,
+    accessToken: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    client.getSpace(process.env.SPACE_ID)
+    client.getSpace('bbbbbbbbbbbbbbbbbbbb')
       .then((space) => space.getEnvironment('master'))
       .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
       .then((entry) => console.log(entry))
