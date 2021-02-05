@@ -61,6 +61,8 @@ function contentfulize(obj) {
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
 
+  console.log(process.env.CONTENTFUL_MANGAGEMENT_API_KEY);
+
   const client = createClient({
     accessToken: process.env.CONTENTFUL_MANAGEMENT_API_KEY,
   });
