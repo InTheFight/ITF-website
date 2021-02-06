@@ -9,7 +9,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "contentful-management": "zopa/contentful-management.js#webpack-regenerator-runtime",
+    "contentful-management": "^7.7.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
@@ -74,8 +74,7 @@
     "clean": "gatsby clean",
     "test": "jest",
     "lint": "eslint src",
-    "lint:fix": "eslint --fix",
-    "postinstall": "patch -p0 <patches/contentful-management.js.patch"
+    "lint:fix": "eslint --fix"
   },
   "repository": {
     "type": "git",
