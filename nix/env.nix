@@ -7,6 +7,6 @@
 
 (pkgs.buildFHSUserEnv {
   name  = "ITF";
-  targetPkgs = p: with p; [ autoconf automake libtool zlib nodejs nodePackages.npm ];
+  targetPkgs = p: with p; [ autoconf automake libtool zlib nodejs nodePackages.npm git ];
   inherit runScript;
 }).env

@@ -1,151 +1,182 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import {useStaticQuery, graphql} from 'gatsby';
 
-import Title from '../components/atoms/title';
+import { createClient } from 'contentful-management';
 import Layout from '../components/templates/layout';
 import Button from '../components/atoms/button';
-import FormElement from '../components/organisms/FormElement';
+import LinesSought from '../components/molecules/LinesSought';
+import Bool from '../components/molecules/Bool';
+import FormTextInput from '../components/atoms/FormTextInput';
+import FormTextArea from '../components/atoms/FormTextArea';
 
 import {
+  EndorsementIntro,
   Form,
   QuestionnaireTitle,
   Input,
-  TextArea,
+  NumberInput,
   Label,
-  ButtonContainer,
-  Other,
+  FormButtonContainer,
   Select,
-  VirtualText,
-  CheckboxLabel,
-  Checkbox,
-  Checkboxes,
-  Legend
 } from '../styles/form-styles';
-import { createClient } from 'contentful-management'
 
-const parties =
-      { Democratic: "Democratic",
-        Republican: "Republican",
-        Conservative: "Conservative",
-        Independence: "Independence",
-        Green: "Green",
-        Libertarian: "Libertarian",
-        SAM: "SAM",
-        Working_Families_Party: "Working Families Party",
-        Other: "Other",
-      }
+const parties = { Democratic: 'Democratic',
+  Republican: 'Republican',
+  Conservative: 'Conservative',
+  Independence: 'Independence',
+  Green: 'Green',
+  Libertarian: 'Libertarian',
+  SAM: 'SAM',
+  Working_Families_Party: 'Working Families Party',
+  Other: 'Other',
+};
 
-const LinesSought = ({ legend, setField }) => {
-  return (
-    <Checkboxes>
-      <Legend>{legend}</Legend>
-      {Object.entries(parties).map(([k,v]) =>
-            <CheckboxLabel>
-              <span>{v}</span>
-              <Checkbox type="checkbox" name={k} onChange={setField} />
-            </CheckboxLabel>)}
-    </Checkboxes>
-  )
-}
-
-const Bool = ({name, setField}) => {
-  return (
-    <div>
-      <Label for={name+"_yes"} ><span>Yes</span>
-        <Input type="radio" name={name} id={name+"_yes"} value="yes" onChange={setField} />
-      </Label>
-      <Label for={name+"_no"} ><span>No</span>
-        <Input type="radio" name={name} if={name+"_no"} value="no" onChange={setField} />
-      </Label>
-    </div>
-  )
-
-}
 // Modify a simple key-value mapping into the format Contentful needs
 function contentfulize(obj) {
+  const result = {
+    linesSought: {
+      'en-US': {
+        parties: [],
+      },
+    },
+  };
 
-  const result = {}
-
-  Object.entries(obj).map(([k,v]) => {
-    const skipReformat = ["incumbent", "challenger"]
+  Object.entries(obj).map(([k, v]) => {
+    const skipReformat = ['incumbent', 'challenger'];
+    const partyFields = Object.keys(parties);
     if (skipReformat.includes(k)) {
-      const field = Object.fromEntries([[k,v]])
-      Object.assign(result, field)
-
+      const field = Object.fromEntries([[k, { 'en-US': v }]]);
+      Object.assign(result, field);
+    } else if (partyFields.includes(k)) {
+      if (v == 'on') {
+        result.linesSought['en-US'].parties.push(k);
+      }
     } else { // Text fields
-      const field = Object.fromEntries([[k,{'en-US': v}]])
-      Object.assign(result, field)
+      const field = Object.fromEntries([[k, { 'en-US': v }]]);
+      Object.assign(result, field);
     }
-  })
-
-  return {fields: result}
+  });
+  return { fields: result };
 }
 
 const Endorsements = () => {
-  const [questionnaire, setQuestionnaire] = useState({})
+  const [questionnaire, setQuestionnaire] = useState({});
+
+  const data = useStaticQuery(
+    graphql`
+      query {
+          site {
+          siteMetadata {
+              tokens {
+              accessToken
+              spaceId
+              apiKey
+              }
+          }
+          }
+      }
+    `)
+
 
   const client = createClient({
-    accessToken: process.env.CONTENTFUL_MANAGEMENT_API_KEY,
-  })
+    accessToken: data.site.siteMetadata.tokens.accessToken
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    client.getSpace(process.env.SPACE_ID)
-    .then((space) => space.getEnvironment('master'))
-    .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
-    .then((entry) => console.log(entry))
-    .catch(console.error)
-   }
+    e.preventDefault();
+    client.getSpace(data.site.siteMetadata.tokens.spaceId)
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
+      .then((entry) => console.log(entry))
+      .catch(console.error);
+    e.target.reset();
+  };
 
   const setField = (event) => {
-    const {name, value } = event.target
+    const { name, value } = event.target;
 
     if (name === 'linesSought') {
 
     } else if (name === 'incumbent' || name === 'challenger') {
-      const fieldVal = Object.fromEntries([[name, value === "yes"]])
-      setQuestionnaire(Object.assign(questionnaire, fieldVal))
-
+      const fieldVal = Object.fromEntries([[name, value === 'yes']]);
+      setQuestionnaire(Object.assign(questionnaire, fieldVal));
     } else {
-
-      const fieldVal = Object.fromEntries([[name, value]])
-      setQuestionnaire(Object.assign(questionnaire, fieldVal))
+      const fieldVal = Object.fromEntries([[name, value]]);
+      setQuestionnaire(Object.assign(questionnaire, fieldVal));
     }
-
-    // } else if (Object.keys(parties).includes(name)) {
-    //   // setLinesSought(Object.assign(k:v))
-    // }
-  }
+  };
 
   return (
     <Layout>
-      <Title text="Endorsement Questionnaire"></Title>
+      <QuestionnaireTitle>Endorsement Questionnaire</QuestionnaireTitle>
+      <EndorsementIntro>
+        <p>
+          Thank you for your interest in earning an endorsement from In The Fight North
+          Brooklyn!
+        </p>
+
+        <p>
+          Please complete the questionnaire below and submit your answers. If invited to
+          interview with our members, a member of the ITF-NBK electoral team will be in
+          touch via the email you provide below.
+        </p>
+
+        <p>
+          An endorsement from In the Fight North Brooklyn comes with our organization's
+          commitment of time, resources, and mutual support. We focus on endorsing in
+          local elections that impact our North Brooklyn community.
+        </p>
+
+        <p>We are currently focusing on speaking with candidates for the following offices:
+          <ul>
+            <li>Mayor</li>
+            <li>Public Advocate</li>
+            <li>Comptroller</li>
+            <li>Brooklyn Borough President</li>
+            <li>City Council Districts: 33, 34, 35, 36 & 37</li>
+          </ul>
+        </p>
+
+        <p>
+          If you are a candidate for an office not listed above, give us a shout! We
+          routinely support candidates that share our values, and would love to get
+          involved and see how we can work together. If you have any issues with the
+          questionnaire or need to contact us, you can reach us
+          at <a href="mailto: electoral@inthefight.org">electoral@inthefight.org</a>.
+        </p>
+        </EndorsementIntro>
+
       <Form onSubmit={handleSubmit}>
-        <FormElement
+        <FormTextInput
           label="Candidate's Full Name"
           name="fullName"
           setField={setField}
         />
-        <Label>
-          <div>Candidate's Pronouns</div>
-          <Input type="text" name="pronouns" onChange={setField} />
-        </Label>
+        <FormTextInput
+          label="Candidate's Pronouns"
+          name="pronouns"
+          setField={setField}
+        />
         <Label>
           <div>Election / Primary Date</div>
           <Input type="date" name="electionDate" onChange={setField} />
         </Label>
-        <Label>
-          <div>Current Office / Occupation</div>
-          <Input type="text" name="occupation" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Preferred Campaign Point of Contact (Name)</div>
-          <Input type="text" name="contactName" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Preferred Campaign Point of Contact (Role)</div>
-          <Input type="text" name="contactRole" onChange={setField} />
-        </Label>
+        <FormTextInput
+          label="Current Office / Occupation"
+          name="occupation"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Preferred Campaign Point of Contact (Name)"
+          name="contactName"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Preferred Campaign Point of Contact (Role)"
+          name="contactRole"
+          setField={setField}
+        />
         <Label>
           <div>Preferred Campaign Point of Contact (Email)</div>
           <Input type="email" name="email" onChange={setField} />
@@ -154,10 +185,10 @@ const Endorsements = () => {
           <div>Preferred Campaign Point of Contact (Phone Number)</div>
           <Input type="tel" name="phone" onChange={setField} />
         </Label>
-        {/* TODO: make this a select list  */}
         <Label>
           <div>In which political party are you currently registered?</div>
-          <Select name="party">
+          <Select onChange={setField} name="party">
+            <option selected="selected">Select a party</option>
             <option value="Democratic">Democratic</option>
             <option value="Republican">Republican</option>
             <option value="Conservative">Conservative</option>
@@ -169,47 +200,55 @@ const Endorsements = () => {
             <option value="Other">Other</option>
           </Select>
         </Label>
-        <Label>
-          <div>Name of Your Campaign Commitee</div>
-          <Input type="text" name="committee" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Campaign Address</div>
-          <Input type="text" name="campaignAddress" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Campaign Zip</div>
-          <Input type="text" name="campaignZip" onChange={setField} />
-        </Label>
+        <FormTextInput
+          label="Name of Your Campaign Committee"
+          name="committee"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Campaign Address"
+          name="campaignAddress"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Campaign Zip"
+          name="campaignZip"
+          setField={setField}
+        />
         <Label>
           <div>Campaign Website</div>
           <Input type="url" name="website" onChange={setField} />
         </Label>
-        <Label>
-          <div>Campaign Facebook</div>
-          <Input type="text" name="facebook" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Campaign Twitter</div>
-          <Input type="text" name="twitter" onChange={setField} />
-        </Label>
-        {/* TODO: make a list-able thing. Maybe should allow multiple?*/}
-        <Label>
-          <div>Other campaign social media accounts (please list)</div>
-          <Input type="text" name="socialMedia" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Name of Office you are seeking</div>
-          <Input type="text" name="office" onChange={setField} />
-        </Label>
+        <FormTextInput
+          label="Campaign Facebook"
+          name="facebook"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Campaign Twitter"
+          name="twitter"
+          setField={setField}
+        />
+        {/* TODO: make a list-able thing. Maybe should allow multiple? */}
+        <FormTextInput
+          label="Other campaign social media accounts (please list)"
+          name="socialMedia"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Name of Office you are seeking"
+          name="office"
+          setField={setField}
+        />
         <Label>
           <div>District Number, if applicable</div>
-          <Input type="number" name="districtNumber" onChange={setField} />
+          <NumberInput type="number" name="districtNumber" onChange={setField} />
         </Label>
         {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
         <LinesSought
           legend='Check all of the party lines you are seeking, including any "non-official party lines"'
           setField={setField}
+          parties={parties}
         />
         {/* TODO: yes/no radio */}
         <Label>
@@ -220,75 +259,71 @@ const Endorsements = () => {
           <div>Are you challenging an incumbent?</div>
           <Bool name="challenger" setField={setField} />
         </Label>
-        <Label>
-          <div>Name of incumbent (if applicable)</div>
-          <Input type="text" name="incumbentName" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Name of primary opponent(s) if applicable </div>
-          <Input type="text" name="primaryOpponents" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Name of general election opponent(s) if applicable/known</div>
-          <Input type="text" name="generalOpponents" onChange={setField} />
-        </Label>
-        <Label>
+        <FormTextInput
+          label="Name of incumbent (if applicable)"
+          name="incumbentName"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Name of primary opponent(s) if applicable"
+          name="primaryOpponents"
+          setField={setField}
+        />
+        <FormTextInput
+          label="Name of general election opponent(s) if applicable/known"
+          name="generalOpponents"
+          setField={setField}
+        />
+        <FormTextArea setField={setField} name="vision">
           <div>
             <p>Tell us about who you are and why you are running. Include your core values and vision.</p>
             <p>What are the biggest challenges facing the district you hope to repersent? What needs to happen for those to be resolved?</p>
           </div>
-          <TextArea rows="10" name="vision" onChange={setField} />
-        </Label>
-        <Label>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="engagement">
           <div>How will you engage with diverse groups across the district you hope to represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.</div>
-          <TextArea rows="10" name="engagement" onChange={setField} />
-        </Label>
-        <Label>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="priorRuns">
           <div>Have you run for office previously? If so, please provide details.</div>
-          <TextArea rows="5" name="priorRuns" onChange={setField} />
-        </Label>
+        </FormTextArea>
         {/* TODO: Make list */}
-        <Label>
+        <FormTextArea setField={setField} name="endorsements">
           <div>Please list other endorsements you have earned, especially from unions, progressive organizations, and progressive elected officials.</div>
-          <TextArea rows="5" name="endorsements" onChange={setField} />
-        </Label>
-        <Label>
-          <div>What civic and political organizations are you involved with in the city?
-
-          If we called them up, what would they tell us about you?</div>
-          <TextArea rows="10" name="orgs" onChange={setField} />
-        </Label>
-        <Label>
-          <div>What would your best friends say about you?</div>
-          <TextArea rows="10" name="friends" onChange={setField} />
-        </Label>
-        <Label>
-          <div>What is your greatest strength and greatest weakness as a candidate?</div>
-          <TextArea rows="10" name="strength" onChange={setField} />
-        </Label>
-        <Label>
-          <div>What are your top 3 priorities or policies you hope to accomplish in this term of office? Please be realistic about the scope of the office.</div>
-          <TextArea rows="10" name="priorities" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Why do you want In The Fight NBK's endorsement?</div>
-          <TextArea rows="10" name="itfLove" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
-          <TextArea rows="5" name="itfMembers" onChange={setField} />
-        </Label>
-        <Label>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="orgs">
           <div>
-            <p>Are you committed to fighting for a society built on true racial,
-               economic and gender justice and equity?</p>
+            What civic and political organizations are you involved with in the city?
+
+            If we called them up, what would they tell us about you?
+          </div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="friends">
+          <div>What would your best friends say about you?</div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="strength">
+          <div>What is your greatest strength and greatest weakness as a candidate?</div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="priorities">
+          <div>What are your top 3 priorities or policies you hope to accomplish in this term of office? Please be realistic about the scope of the office.</div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="itfLove">
+          <div>Why do you want In The Fight NBK's endorsement?</div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="itfMembers">
+          <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
+        </FormTextArea>
+        <FormTextArea setField={setField} name="justice">
+          <div>
+            <p>
+              Are you committed to fighting for a society built on true racial,
+              economic and gender justice and equity?
+            </p>
             <p>Please provide examples showing this work.</p>
           </div>
-          <TextArea rows="10" name="justice" onChange={setField} />
-        </Label>
-        <ButtonContainer>
+        </FormTextArea>
+        <FormButtonContainer>
           <Button text="Submit" color="purple" />
-        </ButtonContainer>
+        </FormButtonContainer>
       </Form>
     </Layout>
   );
