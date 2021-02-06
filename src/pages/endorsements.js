@@ -131,8 +131,7 @@ const Endorsements = () => {
         <p>We are currently focusing on speaking with candidates for the following offices:
           <ul>
             <li>Mayor</li>
-            <li>Public</li>
-            <li>Advocate</li>
+            <li>Public Advocate</li>
             <li>Comptroller</li>
             <li>Brooklyn Borough President</li>
             <li>City Council Districts: 33, 34, 35, 36 & 37</li>
