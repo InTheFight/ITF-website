@@ -25,6 +25,11 @@ module.exports = {
         url: '/resources',
       },
     ],
+    tokens: {
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      spaceId: process.env.SPACE_ID,
+      apiKey: process.env.CONTENTFUL_MANAGEMENT_API_KEY
+    },
   },
   plugins: [
     'gatsby-plugin-react-helmet',

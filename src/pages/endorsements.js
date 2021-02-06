@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import {useStaticQuery, graphql} from 'gatsby';
 
 import { createClient } from 'contentful-management';
 import Layout from '../components/templates/layout';
@@ -18,6 +19,21 @@ import {
   FormButtonContainer,
   Select,
 } from '../styles/form-styles';
+
+const data = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            tokens {
+              accessToken
+              spaceId
+              apiKey
+            }
+          }
+        }
+      }
+    `)
 
 const parties = { Democratic: 'Democratic',
   Republican: 'Republican',
@@ -61,15 +77,13 @@ function contentfulize(obj) {
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
 
-  console.log(process.env.SPACE_ID);
-
   const client = createClient({
-    accessToken: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    accessToken: data.site.siteMetadata.tokens.accessToken
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    client.getSpace('bbbbbbbbbbbbbbbbbbbb')
+    client.getSpace(data.site.siteMetadata.tokens.spaceId)
       .then((space) => space.getEnvironment('master'))
       .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
       .then((entry) => console.log(entry))
