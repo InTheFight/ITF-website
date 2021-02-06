@@ -11,6 +11,7 @@ import FormTextInput from '../components/atoms/FormTextInput';
 import FormTextArea from '../components/atoms/FormTextArea';
 
 import {
+  EndorsementIntro,
   Form,
   QuestionnaireTitle,
   Input,
@@ -19,21 +20,6 @@ import {
   FormButtonContainer,
   Select,
 } from '../styles/form-styles';
-
-const data = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            tokens {
-              accessToken
-              spaceId
-              apiKey
-            }
-          }
-        }
-      }
-    `)
 
 const parties = { Democratic: 'Democratic',
   Republican: 'Republican',
@@ -77,6 +63,22 @@ function contentfulize(obj) {
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
 
+  const data = useStaticQuery(
+    graphql`
+      query {
+          site {
+          siteMetadata {
+              tokens {
+              accessToken
+              spaceId
+              apiKey
+              }
+          }
+          }
+      }
+    `)
+
+
   const client = createClient({
     accessToken: data.site.siteMetadata.tokens.accessToken
   });
@@ -108,6 +110,44 @@ const Endorsements = () => {
   return (
     <Layout>
       <QuestionnaireTitle>Endorsement Questionnaire</QuestionnaireTitle>
+      <EndorsementIntro>
+        <p>
+          Thank you for your interest in earning an endorsement from In The Fight North
+          Brooklyn!
+        </p>
+
+        <p>
+          Please complete the questionnaire below and submit your answers. If invited to
+          interview with our members, a member of the ITF-NBK electoral team will be in
+          touch via the email you provide below.
+        </p>
+
+        <p>
+          An endorsement from In the Fight North Brooklyn comes with our organization's
+          commitment of time, resources, and mutual support. We focus on endorsing in
+          local elections that impact our North Brooklyn community.
+        </p>
+
+        <p>We are currently focusing on speaking with candidates for the following offices:
+          <ul>
+            <li>Mayor</li>
+            <li>Public</li>
+            <li>Advocate</li>
+            <li>Comptroller</li>
+            <li>Brooklyn Borough President</li>
+            <li>City Council Districts: 33, 34, 35, 36 & 37</li>
+          </ul>
+        </p>
+
+        <p>
+          If you are a candidate for an office not listed above, give us a shout! We
+          routinely support candidates that share our values, and would love to get
+          involved and see how we can work together. If you have any issues with the
+          questionnaire or need to contact us, you can reach us
+          at <a href="mailto: electoral@inthefight.org">electoral@inthefight.org</a>.
+        </p>
+        </EndorsementIntro>
+
       <Form onSubmit={handleSubmit}>
         <FormTextInput
           label="Candidate's Full Name"

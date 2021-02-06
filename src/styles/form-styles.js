@@ -19,6 +19,12 @@ export const Form = styled.form`
 export const QuestionnaireTitle = styled.h1`
   margin-left: 92px;
 `;
+
+export const EndorsementIntro = styled.section`
+  width: 800px;
+  margin: 40px 0px 0px 92px;
+`
+
 export const Input = styled.input`
   font-size: large;
   height: 27px;
