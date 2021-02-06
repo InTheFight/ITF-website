@@ -75,7 +75,7 @@
     "test": "jest",
     "lint": "eslint src",
     "lint:fix": "eslint --fix",
-    "postinstall": "patch -N -p0 <patches/contentful-management.js.patch"
+    "postinstall": "patch -N -p0 <patches/contentful-management.js.patch || true"
   },
   "repository": {
     "type": "git",
