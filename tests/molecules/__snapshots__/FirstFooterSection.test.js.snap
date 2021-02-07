@@ -6,38 +6,38 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="sc-hKFyIo dhoVkf"
+        class="sc-hKgILt dMHZN"
       >
         <h2
-          class="sc-eCApGN kYJuwZ"
+          class="sc-eCssSg ecfjQU"
         >
           Subscribe to get updates!
         </h2>
         <form
-          class="sc-gKAblj dRVNLK"
+          class="sc-gKsewC ehdtkM"
         >
           <label
-            class="sc-jSFkmK jyqZZv"
+            class="sc-jSgupP hifkBD"
           >
             Name:
             <input
-              class="sc-iCoHVE iFJqNO"
+              class="sc-iBPRYJ kpCpKr"
               name="name"
               type="text"
             />
           </label>
           <label
-            class="sc-jSFkmK jyqZZv"
+            class="sc-jSgupP hifkBD"
           >
             Email:
             <input
-              class="sc-iCoHVE iFJqNO"
+              class="sc-iBPRYJ kpCpKr"
               name="email"
               type="text"
             />
           </label>
           <input
-            class="sc-dlnjPT cvhTmW"
+            class="sc-dlfnbm emmtqM"
             type="submit"
             value="Submit"
           />
@@ -47,38 +47,38 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="sc-hKFyIo dhoVkf"
+      class="sc-hKgILt dMHZN"
     >
       <h2
-        class="sc-eCApGN kYJuwZ"
+        class="sc-eCssSg ecfjQU"
       >
         Subscribe to get updates!
       </h2>
       <form
-        class="sc-gKAblj dRVNLK"
+        class="sc-gKsewC ehdtkM"
       >
         <label
-          class="sc-jSFkmK jyqZZv"
+          class="sc-jSgupP hifkBD"
         >
           Name:
           <input
-            class="sc-iCoHVE iFJqNO"
+            class="sc-iBPRYJ kpCpKr"
             name="name"
             type="text"
           />
         </label>
         <label
-          class="sc-jSFkmK jyqZZv"
+          class="sc-jSgupP hifkBD"
         >
           Email:
           <input
-            class="sc-iCoHVE iFJqNO"
+            class="sc-iBPRYJ kpCpKr"
             name="email"
             type="text"
           />
         </label>
         <input
-          class="sc-dlnjPT cvhTmW"
+          class="sc-dlfnbm emmtqM"
           type="submit"
           value="Submit"
         />

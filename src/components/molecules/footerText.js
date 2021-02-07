@@ -39,10 +39,6 @@ function FooterText() {
         <h2>IN THE FIGHT</h2>
         <ClickableIcon img={ring} alt="ring" link="/" />
       </TitleRow>
-      <p>
-        Amem minim mollit non deserunt ullamco est sit aliqua dolor do amet
-        sint.
-      </p>
     </FooterTextStyle>
   );
 }

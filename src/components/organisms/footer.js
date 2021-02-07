@@ -37,7 +37,7 @@ const Footer = () => (
   <FooterStyle>
     <FooterText />
     <SocalMedia>
-      <Copyright> &#169;2020</Copyright>
+      <Copyright> &#169;2021</Copyright>
       <IconsPanel />
     </SocalMedia>
   </FooterStyle>

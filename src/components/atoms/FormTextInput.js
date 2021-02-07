@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Input,
   Label,
@@ -12,3 +13,9 @@ const FormTextInput = ({ label, setField, name }) => (
 );
 
 export default FormTextInput;
+
+FormTextInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  setField: PropTypes.func.isRequired,
+};
