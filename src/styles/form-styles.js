@@ -18,9 +18,16 @@ export const Form = styled.form`
 
 export const QuestionnaireTitle = styled.h1`
   margin-left: 92px;
+  font-family: DIN Condensed;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
 `;
 
 export const EndorsementIntro = styled.section`
+  font-family: DIN Condensed;
   width: 800px;
   margin: 40px 0px 0px 92px;
 `
@@ -77,6 +84,7 @@ export const CheckboxContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   margin-left: 15px;
+  width: 520px !important;
 `;
 
 export const Checkbox = styled.input`
