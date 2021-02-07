@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   TextArea,
   Label,
@@ -12,3 +13,8 @@ const FormTextArea = ({ children, setField, name }) => (
 );
 
 export default FormTextArea;
+FormTextArea.propTypes = {
+  children: PropTypes.node.isRequired,
+  setField: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+};

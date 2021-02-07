@@ -30,7 +30,7 @@ export const EndorsementIntro = styled.section`
   font-family: DIN Condensed;
   width: 800px;
   margin: 40px 0px 0px 92px;
-`
+`;
 
 export const Input = styled.input`
   font-size: large;
