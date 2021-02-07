@@ -24,3 +24,11 @@ const LinesSought = ({ legend, setField, parties }) => (
 );
 
 export default LinesSought;
+
+LinesSought.propTypes = {
+  legend: PropTypes.string.isRequired,
+  setField: PropTypes.func.isRequired,
+  /* eslint-disable react/forbid-prop-types */
+  parties: PropTypes.object.isRequired,
+  /* eslint-disable react/forbid-prop-types */
+};

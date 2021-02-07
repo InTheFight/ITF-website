@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import {useStaticQuery, graphql} from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 
+/* eslint-disable import/no-unresolved */
 import { createClient } from 'contentful-management';
+/* eslint-disable import/no-unresolved */
+
 import Layout from '../components/templates/layout';
 import Button from '../components/atoms/button';
 import LinesSought from '../components/molecules/LinesSought';
@@ -49,13 +51,14 @@ function contentfulize(obj) {
       const field = Object.fromEntries([[k, { 'en-US': v }]]);
       Object.assign(result, field);
     } else if (partyFields.includes(k)) {
-      if (v == 'on') {
+      if (v === 'on') {
         result.linesSought['en-US'].parties.push(k);
       }
     } else { // Text fields
       const field = Object.fromEntries([[k, { 'en-US': v }]]);
       Object.assign(result, field);
     }
+    return {};
   });
   return { fields: result };
 }
@@ -76,29 +79,26 @@ const Endorsements = () => {
           }
           }
       }
-    `)
-
+    `,
+  );
 
   const client = createClient({
-    accessToken: data.site.siteMetadata.tokens.accessToken
+    accessToken: data.site.siteMetadata.tokens.accessToken,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     client.getSpace(data.site.siteMetadata.tokens.spaceId)
       .then((space) => space.getEnvironment('master'))
-      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
-      .then((entry) => console.log(entry))
-      .catch(console.error);
+      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)));
+    /* TODO: Error handling */
     e.target.reset();
   };
 
   const setField = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'linesSought') {
-
-    } else if (name === 'incumbent' || name === 'challenger') {
+    if (name === 'incumbent' || name === 'challenger') {
       const fieldVal = Object.fromEntries([[name, value === 'yes']]);
       setQuestionnaire(Object.assign(questionnaire, fieldVal));
     } else {
@@ -123,12 +123,13 @@ const Endorsements = () => {
         </p>
 
         <p>
-          An endorsement from In the Fight North Brooklyn comes with our organization's
+          An endorsement from In the Fight North Brooklyn comes with our organization&apos;s
           commitment of time, resources, and mutual support. We focus on endorsing in
           local elections that impact our North Brooklyn community.
         </p>
 
-        <p>We are currently focusing on speaking with candidates for the following offices:
+        <p>
+          We are currently focusing on speaking with candidates for the following offices:
           <ul>
             <li>Mayor</li>
             <li>Public Advocate</li>
@@ -143,9 +144,12 @@ const Endorsements = () => {
           routinely support candidates that share our values, and would love to get
           involved and see how we can work together. If you have any issues with the
           questionnaire or need to contact us, you can reach us
-          at <a href="mailto: electoral@inthefight.org">electoral@inthefight.org</a>.
+          at
+          {' '}
+          <a href="mailto: electoral@inthefight.org">electoral@inthefight.org</a>
+          .
         </p>
-        </EndorsementIntro>
+      </EndorsementIntro>
 
       <Form onSubmit={handleSubmit}>
         <FormTextInput
@@ -244,7 +248,8 @@ const Endorsements = () => {
           <div>District Number, if applicable</div>
           <NumberInput type="number" name="districtNumber" onChange={setField} />
         </Label>
-        {/* TODO: Add the additional text. Does it fight in a label, or do we need a separate note? */}
+        {/* TODO: Add the additional text. Does it fight in a label, or do we
+          * need a separate note? */}
         <LinesSought
           legend='Check all of the party lines you are seeking, including any "non-official party lines"'
           setField={setField}
@@ -276,19 +281,31 @@ const Endorsements = () => {
         />
         <FormTextArea setField={setField} name="vision">
           <div>
-            <p>Tell us about who you are and why you are running. Include your core values and vision.</p>
-            <p>What are the biggest challenges facing the district you hope to repersent? What needs to happen for those to be resolved?</p>
+            <p>
+              Tell us about who you are and why you are running. Include your core values and
+              vision.
+            </p>
+            <p>
+              What are the biggest challenges facing the district you hope to repersent? What
+              needs to happen for those to be resolved?
+            </p>
           </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="engagement">
-          <div>How will you engage with diverse groups across the district you hope to represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.</div>
+          <div>
+            How will you engage with diverse groups across the district you hope to
+            represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.
+          </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="priorRuns">
           <div>Have you run for office previously? If so, please provide details.</div>
         </FormTextArea>
         {/* TODO: Make list */}
         <FormTextArea setField={setField} name="endorsements">
-          <div>Please list other endorsements you have earned, especially from unions, progressive organizations, and progressive elected officials.</div>
+          <div>
+            Please list other endorsements you have earned, especially from unions, progressive
+            organizations, and progressive elected officials.
+          </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="orgs">
           <div>
@@ -304,13 +321,19 @@ const Endorsements = () => {
           <div>What is your greatest strength and greatest weakness as a candidate?</div>
         </FormTextArea>
         <FormTextArea setField={setField} name="priorities">
-          <div>What are your top 3 priorities or policies you hope to accomplish in this term of office? Please be realistic about the scope of the office.</div>
+          <div>
+            What are your top 3 priorities or policies you hope to accomplish in this
+            term of office? Please be realistic about the scope of the office.
+          </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="itfLove">
-          <div>Why do you want In The Fight NBK's endorsement?</div>
+          <div>Why do you want In The Fight NBK&apos;s endorsement?</div>
         </FormTextArea>
         <FormTextArea setField={setField} name="itfMembers">
-          <div>Were you referred to In The Fight NBK by any of our members? (here is where you name drop!)</div>
+          <div>
+            Were you referred to In The Fight NBK by any of our members? (here
+            is where you name drop!)
+          </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="justice">
           <div>
@@ -327,10 +350,6 @@ const Endorsements = () => {
       </Form>
     </Layout>
   );
-};
-
-Endorsements.propTypes = {
-  data: PropTypes.node.isRequired,
 };
 
 export default Endorsements;

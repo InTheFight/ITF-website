@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   RadioInput,
   RadioLabelYes,
@@ -19,3 +20,8 @@ const Bool = ({ name, setField }) => (
 );
 
 export default Bool;
+
+Bool.propTypes = {
+  setField: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+};
