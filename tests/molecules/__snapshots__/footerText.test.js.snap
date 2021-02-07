@@ -6,10 +6,10 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="sc-gtssRu livFIg"
+        class="sc-gsTCUz chAbDZ"
       >
         <div
-          class="sc-dlnjPT jitMvg"
+          class="sc-dlfnbm chJeAe"
         >
           <h2>
             IN THE FIGHT
@@ -19,23 +19,20 @@ Object {
           >
             <img
               alt="ring"
-              class="sc-bdnylx hjenXh"
+              class="sc-bdfBwQ WWxNV"
               src=""
             />
           </a>
         </div>
-        <p>
-          Amem minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-        </p>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="sc-gtssRu livFIg"
+      class="sc-gsTCUz chAbDZ"
     >
       <div
-        class="sc-dlnjPT jitMvg"
+        class="sc-dlfnbm chJeAe"
       >
         <h2>
           IN THE FIGHT
@@ -45,14 +42,11 @@ Object {
         >
           <img
             alt="ring"
-            class="sc-bdnylx hjenXh"
+            class="sc-bdfBwQ WWxNV"
             src=""
           />
         </a>
       </div>
-      <p>
-        Amem minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-      </p>
     </div>
   </div>,
   "debug": [Function],
