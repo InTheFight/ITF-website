@@ -151,3 +151,7 @@ export const RadioLabelNo = styled.label`
 export const RadioInput = styled.input`
   width: 20px;
 `;
+
+export const FormNumberedFields = styled.ol`
+  border: none;
+`

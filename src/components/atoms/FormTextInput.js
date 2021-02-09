@@ -6,10 +6,12 @@ import {
 } from '../../styles/form-styles';
 
 const FormTextInput = ({ label, setField, name }) => (
-  <Label>
-    <div>{label}</div>
-    <Input type="text" name={name} onChange={setField} />
-  </Label>
+  <li>
+    <Label>
+      <div>{label}</div>
+      <Input type="text" name={name} onChange={setField} />
+    </Label>
+  </li>
 );
 
 export default FormTextInput;
