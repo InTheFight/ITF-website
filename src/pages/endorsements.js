@@ -21,6 +21,7 @@ import {
   Label,
   FormButtonContainer,
   Select,
+  TextAreaLabelPara
 } from '../styles/form-styles';
 
 const parties = { Democratic: 'Democratic',
@@ -281,20 +282,20 @@ const Endorsements = () => {
         />
         <FormTextArea setField={setField} name="vision">
           <div>
-            <p>
+            <TextAreaLabelPara>
               Tell us about who you are and why you are running. Include your core values and
               vision.
-            </p>
-            <p>
+            </TextAreaLabelPara>
+            <TextAreaLabelPara>
               What are the biggest challenges facing the district you hope to repersent? What
               needs to happen for those to be resolved?
-            </p>
+            </TextAreaLabelPara>
           </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="engagement">
           <div>
             How will you engage with diverse groups across the district you hope to
-            represent? Religious, ethnic, immigration status, helth status, LGBTQIA+, etc.
+            represent? Religious, ethnic, immigration status, health status, LGBTQIA+, etc.
           </div>
         </FormTextArea>
         <FormTextArea setField={setField} name="priorRuns">
@@ -337,11 +338,11 @@ const Endorsements = () => {
         </FormTextArea>
         <FormTextArea setField={setField} name="justice">
           <div>
-            <p>
+            <TextAreaLabelPara>
               Are you committed to fighting for a society built on true racial,
               economic and gender justice and equity?
-            </p>
-            <p>Please provide examples showing this work.</p>
+            </TextAreaLabelPara>
+            <TextAreaLabelPara>Please provide examples showing this work.</TextAreaLabelPara>
           </div>
         </FormTextArea>
         <FormButtonContainer>
