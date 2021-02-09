@@ -83,7 +83,7 @@ const Endorsements = () => {
   );
 
   const client = createClient({
-    accessToken: data.site.siteMetadata.tokens.accessToken,
+    accessToken: data.site.siteMetadata.tokens.apiKey,
   });
 
   const handleSubmit = (e) => {
