@@ -18,7 +18,8 @@ export const Form = styled.form`
 
 export const QuestionnaireTitle = styled.h1`
   margin-left: 92px;
-  font-family: DIN Condensed;
+  margin-top: 16px;
+  font-family: urw-din-condensed;
   font-weight: bold;
   text-transform: uppercase;
   font-style: normal;
@@ -27,38 +28,57 @@ export const QuestionnaireTitle = styled.h1`
 `;
 
 export const EndorsementIntro = styled.section`
-  font-family: DIN Condensed;
+  font-family: urw-din-condensed;
   width: 800px;
   margin: 40px 0px 0px 92px;
 `;
 
 export const Input = styled.input`
+  font-family: urw-din;
   font-size: large;
   height: 27px;
   width: 600px;
+  margin-top: 8px;
+  border: 2px solid #2C358F;
+  padding: 8px;
 `;
 
 export const NumberInput = styled.input`
   font-size: large;
+  font-family: urw-din;
   height: 27px;
   width: 600px;
   -moz-appearance: textfield;
 `;
 
 export const TextArea = styled.textarea`
+  font-family: urw-din;
   font-size: large;
   width: 600px;
 `;
 
+export const TextAreaLabel = styled.label`
+  display: flex;
+  font-family: gelo;
+  font-weight: 300;
+  font-size: 24px;
+  flex-direction: column;
+  margin: 40px 0 10px 0;
+`;
+
 export const Label = styled.label`
   display: flex;
-  font-size: medium;
+  font-family: gelo;
+  font-weight: 300;
+  font-size: 24px;
   flex-direction: column;
-  margin: 10px 0 10px 0;
+  margin: 40px 0 10px 0;
 `;
 
 export const FormButtonContainer = styled.div`
   margin-top: inherit;
+  font-family: urw-din;
+  font-weight: 700 !important;
 
   & input {
     width: 615px !important;
@@ -66,6 +86,7 @@ export const FormButtonContainer = styled.div`
 `;
 
 export const Select = styled.select`
+  font-family: urw-din;
   font-size: medium;
   width 360px;
 `;
@@ -76,7 +97,8 @@ export const VirtualText = styled.p`
 `;
 
 export const CheckboxLabel = styled.label`
-  font-size: small;
+  font-size: 16px;
+  font-family: urw-din;
   margin: 10px 40px 10px 0;
 `;
 
@@ -102,17 +124,21 @@ export const Checkboxes = styled.fieldset`
 `;
 
 export const Legend = styled.legend`
-  font-size: medium;
+  font-family: gelo;
+  font-size: 24px;
   margin: 10px 40px 10px 0;
 `;
 
 export const RadioLabelYes = styled.label`
-  display: flex
+  font-size: 16px;
+  font-family: urw-din;
   flex-direction: row;
 `;
+
 export const RadioLabelNo = styled.label`
-  display: flex
+  font-size: 16px;
   flex-direction: row;
+  font-family: urw-din;
   margin-left: 20px;
 `;
 export const RadioInput = styled.input`

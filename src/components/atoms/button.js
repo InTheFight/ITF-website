@@ -8,6 +8,7 @@ const PurpleButton = styled.button`
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
+  font-family: urw-din;
   color: #FFFFFF;
   height: 50px;
   width: 200px;

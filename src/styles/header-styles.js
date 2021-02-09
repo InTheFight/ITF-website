@@ -19,7 +19,7 @@ const Header = styled.header`
     z-index: 1;
 
     h1 {
-      font-family: DIN Condensed;
+      font-family: urw-din-condensed;
       font-weight: bold;
       font-size: 48px;
       text-transform: uppercase;
@@ -49,7 +49,7 @@ const Header = styled.header`
               margin: 0 0.5rem;
 
               a {
-                font-family: URW DIN;
+                font-family: urw-din;
                 font-weight: bold;
                 font-size: 16px;
                 text-transform: uppercase;
