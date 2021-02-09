@@ -5,10 +5,10 @@ import {
   Label,
 } from '../../styles/form-styles';
 
-const FormTextArea = ({ children, setField, name }) => (
+const FormTextArea = ({ children, setField, name, rows }) => (
   <Label>
     {children}
-    <TextArea rows="10" name={name} onChange={setField} />
+    <TextArea rows={ rows ? rows : 10 } name={name} onChange={setField} />
   </Label>
 );
 
