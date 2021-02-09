@@ -21,7 +21,7 @@ import {
   Label,
   FormButtonContainer,
   Select,
-  TextAreaLabelPara
+  TextAreaLabelPara,
 } from '../styles/form-styles';
 
 const parties = { Democratic: 'Democratic',

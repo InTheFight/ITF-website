@@ -72,7 +72,7 @@ export const TextAreaLabelPara = styled.p`
   font-family: gelo;
   font-weight: 300;
   font-size: 24px;
-`
+`;
 export const Label = styled.label`
   display: flex;
   font-family: gelo;
