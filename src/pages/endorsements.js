@@ -163,10 +163,6 @@ const Endorsements = () => {
           name="pronouns"
           setField={setField}
         />
-        <Label>
-          <div>Election / Primary Date</div>
-          <Input type="date" name="electionDate" onChange={setField} />
-        </Label>
         <FormTextInput
           label="Current Office / Occupation"
           name="occupation"
