@@ -30,7 +30,7 @@ export const QuestionnaireTitle = styled.h1`
 export const EndorsementIntro = styled.section`
   font-family: urw-din-condensed;
   width: 800px;
-  margin: 40px 0px 0px 92px;
+  margin: 16px 0px 0px 92px;
 `;
 
 export const Input = styled.input`
@@ -45,6 +45,7 @@ export const Input = styled.input`
 
 export const NumberInput = styled.input`
   font-size: large;
+  margin-top: 8px;
   font-family: urw-din;
   height: 27px;
   width: 600px;
@@ -52,6 +53,7 @@ export const NumberInput = styled.input`
 `;
 
 export const TextArea = styled.textarea`
+  margin-top: 8px;
   font-family: urw-din;
   font-size: large;
   width: 600px;
@@ -63,9 +65,14 @@ export const TextAreaLabel = styled.label`
   font-weight: 300;
   font-size: 24px;
   flex-direction: column;
-  margin: 40px 0 10px 0;
+  margin: 40px 0 0 0;
 `;
 
+export const TextAreaLabelPara = styled.p`
+  font-family: gelo;
+  font-weight: 300;
+  font-size: 24px;
+`
 export const Label = styled.label`
   display: flex;
   font-family: gelo;
