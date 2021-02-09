@@ -218,7 +218,7 @@ const Endorsements = () => {
         />
         <Label>
           <div>Campaign Website</div>
-          <Input type="url" name="website" onChange={setField} />
+          <Input type="text" name="website" onChange={setField} />
         </Label>
         <FormTextInput
           label="Campaign Facebook"
