@@ -19,7 +19,7 @@ export const Form = styled.form`
 export const QuestionnaireTitle = styled.h1`
   margin-left: 92px;
   margin-top: 16px;
-  font-family: urw-din-condensed;
+  font-family: din-condensed;
   font-weight: bold;
   text-transform: uppercase;
   font-style: normal;
@@ -28,7 +28,7 @@ export const QuestionnaireTitle = styled.h1`
 `;
 
 export const EndorsementIntro = styled.section`
-  font-family: urw-din-condensed;
+  font-family: din-condensed;
   width: 800px;
   margin: 16px 0px 0px 92px;
 `;
