@@ -293,7 +293,7 @@ const Endorsements = () => {
                 vision.
               </TextAreaLabelPara>
               <TextAreaLabelPara>
-                What are the biggest challenges facing the district you hope to repersent? What
+                What are the biggest challenges facing the district you hope to represent? What
                 needs to happen for those to be resolved?
               </TextAreaLabelPara>
             </div>
