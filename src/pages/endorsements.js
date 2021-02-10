@@ -163,10 +163,6 @@ const Endorsements = () => {
           name="pronouns"
           setField={setField}
         />
-        <Label>
-          <div>Election / Primary Date</div>
-          <Input type="date" name="electionDate" onChange={setField} />
-        </Label>
         <FormTextInput
           label="Current Office / Occupation"
           name="occupation"
@@ -330,7 +326,7 @@ const Endorsements = () => {
         <FormTextArea setField={setField} name="itfLove">
           <div>Why do you want In The Fight NBK&apos;s endorsement?</div>
         </FormTextArea>
-        <FormTextArea setField={setField} name="itfMembers">
+        <FormTextArea setField={setField} name="itfMembers" rows={5}>
           <div>
             Were you referred to In The Fight NBK by any of our members? (here
             is where you name drop!)
