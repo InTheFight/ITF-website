@@ -180,29 +180,35 @@ const Endorsements = () => {
             name="contactRole"
             setField={setField}
           />
-          <Label>
-            <div>Preferred Campaign Point of Contact (Email)</div>
-            <Input type="email" name="email" onChange={setField} />
-          </Label>
-          <Label>
-            <div>Preferred Campaign Point of Contact (Phone Number)</div>
-            <Input type="tel" name="phone" onChange={setField} />
-          </Label>
-          <Label>
-            <div>In which political party are you currently registered?</div>
-            <Select onChange={setField} name="party">
-              <option selected="selected">Select a party</option>
-              <option value="Democratic">Democratic</option>
-              <option value="Republican">Republican</option>
-              <option value="Conservative">Conservative</option>
-              <option value="Independence">Independence</option>
-              <option value="Green">Green</option>
-              <option value="Libertarian">Libertarian</option>
-              <option value="SAM">SAM</option>
-              <option value="Working_Families_Party">Working Families Party</option>
-              <option value="Other">Other</option>
-            </Select>
-          </Label>
+          <li>
+            <Label>
+              <div>Preferred Campaign Point of Contact (Email)</div>
+              <Input type="email" name="email" onChange={setField} />
+            </Label>
+          </li>
+          <li>
+            <Label>
+              <div>Preferred Campaign Point of Contact (Phone Number)</div>
+              <Input type="tel" name="phone" onChange={setField} />
+            </Label>
+          </li>
+          <li>
+            <Label>
+              <div>In which political party are you currently registered?</div>
+              <Select onChange={setField} name="party">
+                <option selected="selected">Select a party</option>
+                <option value="Democratic">Democratic</option>
+                <option value="Republican">Republican</option>
+                <option value="Conservative">Conservative</option>
+                <option value="Independence">Independence</option>
+                <option value="Green">Green</option>
+                <option value="Libertarian">Libertarian</option>
+                <option value="SAM">SAM</option>
+                <option value="Working_Families_Party">Working Families Party</option>
+                <option value="Other">Other</option>
+              </Select>
+            </Label>
+          </li>
           <FormTextInput
             label="Name of Your Campaign Committee"
             name="committee"
@@ -218,10 +224,11 @@ const Endorsements = () => {
             name="campaignZip"
             setField={setField}
           />
-          <Label>
-            <div>Campaign Website</div>
-            <Input type="text" name="website" onChange={setField} />
-          </Label>
+          <FormTextInput
+            label="Campaign Website"
+            name="website"
+            setField={setField}
+          />
           <FormTextInput
             label="Campaign Facebook"
             name="facebook"
@@ -254,15 +261,16 @@ const Endorsements = () => {
             setField={setField}
             parties={parties}
           />
-          {/* TODO: yes/no radio */}
-          <Label>
-            <div>Are you an incumbent?</div>
-            <Bool name="incumbent" setField={setField} />
-          </Label>
-          <Label>
-            <div>Are you challenging an incumbent?</div>
-            <Bool name="challenger" setField={setField} />
-          </Label>
+          <Bool
+            label="Are you an incumbent?"
+            name="incumbent"
+            setField={setField}
+          />
+          <Bool
+            label="Are you challenging an incumbent?"
+            name="challenger"
+            setField={setField}
+          />
           <FormTextInput
             label="Name of incumbent (if applicable)"
             name="incumbentName"
