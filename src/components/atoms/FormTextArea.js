@@ -9,7 +9,7 @@ const FormTextArea = ({ children, setField, name, rows }) => (
   <li>
     <Label>
       {children}
-      <TextArea rows={ rows ? rows : 10 } name={name} onChange={setField} />
+      <TextArea rows={rows || 10} name={name} onChange={setField} />
     </Label>
   </li>
 );
