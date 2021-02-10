@@ -6,10 +6,12 @@ import {
 } from '../../styles/form-styles';
 
 const FormTextArea = ({ children, setField, name, rows }) => (
-  <Label>
-    {children}
-    <TextArea rows={rows || 10} name={name} onChange={setField} />
-  </Label>
+  <li>
+    <Label>
+      {children}
+      <TextArea rows={rows || 10} name={name} onChange={setField} />
+    </Label>
+  </li>
 );
 
 export default FormTextArea;

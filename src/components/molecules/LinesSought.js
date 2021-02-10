@@ -10,17 +10,19 @@ import {
 } from '../../styles/form-styles';
 
 const LinesSought = ({ legend, setField, parties }) => (
-  <Checkboxes>
-    <Legend>{legend}</Legend>
-    <CheckboxContainer>
-      {Object.entries(parties).map(([k, v]) => (
-        <CheckboxLabel>
-          <span>{v}</span>
-          <Checkbox type="checkbox" name={k} onChange={setField} />
-        </CheckboxLabel>
-      ))}
-    </CheckboxContainer>
-  </Checkboxes>
+  <li>
+    <Checkboxes>
+      <Legend>{legend}</Legend>
+      <CheckboxContainer>
+        {Object.entries(parties).map(([k, v]) => (
+          <CheckboxLabel>
+            <span>{v}</span>
+            <Checkbox type="checkbox" name={k} onChange={setField} />
+          </CheckboxLabel>
+        ))}
+      </CheckboxContainer>
+    </Checkboxes>
+  </li>
 );
 
 export default LinesSought;

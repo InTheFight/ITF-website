@@ -20,6 +20,7 @@ import {
   NumberInput,
   Label,
   FormButtonContainer,
+  FormNumberedFields,
   Select,
   TextAreaLabelPara,
 } from '../styles/form-styles';
@@ -153,197 +154,207 @@ const Endorsements = () => {
       </EndorsementIntro>
 
       <Form onSubmit={handleSubmit}>
-        <FormTextInput
-          label="Candidate's Full Name"
-          name="fullName"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Candidate's Pronouns"
-          name="pronouns"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Current Office / Occupation"
-          name="occupation"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Preferred Campaign Point of Contact (Name)"
-          name="contactName"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Preferred Campaign Point of Contact (Role)"
-          name="contactRole"
-          setField={setField}
-        />
-        <Label>
-          <div>Preferred Campaign Point of Contact (Email)</div>
-          <Input type="email" name="email" onChange={setField} />
-        </Label>
-        <Label>
-          <div>Preferred Campaign Point of Contact (Phone Number)</div>
-          <Input type="tel" name="phone" onChange={setField} />
-        </Label>
-        <Label>
-          <div>In which political party are you currently registered?</div>
-          <Select onChange={setField} name="party">
-            <option selected="selected">Select a party</option>
-            <option value="Democratic">Democratic</option>
-            <option value="Republican">Republican</option>
-            <option value="Conservative">Conservative</option>
-            <option value="Independence">Independence</option>
-            <option value="Green">Green</option>
-            <option value="Libertarian">Libertarian</option>
-            <option value="SAM">SAM</option>
-            <option value="Working_Families_Party">Working Families Party</option>
-            <option value="Other">Other</option>
-          </Select>
-        </Label>
-        <FormTextInput
-          label="Name of Your Campaign Committee"
-          name="committee"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Campaign Address"
-          name="campaignAddress"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Campaign Zip"
-          name="campaignZip"
-          setField={setField}
-        />
-        <Label>
-          <div>Campaign Website</div>
-          <Input type="text" name="website" onChange={setField} />
-        </Label>
-        <FormTextInput
-          label="Campaign Facebook"
-          name="facebook"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Campaign Twitter"
-          name="twitter"
-          setField={setField}
-        />
-        {/* TODO: make a list-able thing. Maybe should allow multiple? */}
-        <FormTextInput
-          label="Other campaign social media accounts (please list)"
-          name="socialMedia"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Name of Office you are seeking"
-          name="office"
-          setField={setField}
-        />
-        <Label>
-          <div>District Number, if applicable</div>
-          <NumberInput type="number" name="districtNumber" onChange={setField} />
-        </Label>
-        {/* TODO: Add the additional text. Does it fight in a label, or do we
-          * need a separate note? */}
-        <LinesSought
-          legend='Check all of the party lines you are seeking, including any "non-official party lines"'
-          setField={setField}
-          parties={parties}
-        />
-        {/* TODO: yes/no radio */}
-        <Label>
-          <div>Are you an incumbent?</div>
-          <Bool name="incumbent" setField={setField} />
-        </Label>
-        <Label>
-          <div>Are you challenging an incumbent?</div>
-          <Bool name="challenger" setField={setField} />
-        </Label>
-        <FormTextInput
-          label="Name of incumbent (if applicable)"
-          name="incumbentName"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Name of primary opponent(s) if applicable"
-          name="primaryOpponents"
-          setField={setField}
-        />
-        <FormTextInput
-          label="Name of general election opponent(s) if applicable/known"
-          name="generalOpponents"
-          setField={setField}
-        />
-        <FormTextArea setField={setField} name="vision">
-          <div>
-            <TextAreaLabelPara>
-              Tell us about who you are and why you are running. Include your core values and
-              vision.
-            </TextAreaLabelPara>
-            <TextAreaLabelPara>
-              What are the biggest challenges facing the district you hope to repersent? What
-              needs to happen for those to be resolved?
-            </TextAreaLabelPara>
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="engagement">
-          <div>
-            How will you engage with diverse groups across the district you hope to
-            represent? Religious, ethnic, immigration status, health status, LGBTQIA+, etc.
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="priorRuns">
-          <div>Have you run for office previously? If so, please provide details.</div>
-        </FormTextArea>
-        {/* TODO: Make list */}
-        <FormTextArea setField={setField} name="endorsements">
-          <div>
-            Please list other endorsements you have earned, especially from unions, progressive
-            organizations, and progressive elected officials.
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="orgs">
-          <div>
-            What civic and political organizations are you involved with in the city?
+        <FormNumberedFields>
+          <FormTextInput
+            label="Candidate's Full Name"
+            name="fullName"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Candidate's Pronouns"
+            name="pronouns"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Current Office / Occupation"
+            name="occupation"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Preferred Campaign Point of Contact (Name)"
+            name="contactName"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Preferred Campaign Point of Contact (Role)"
+            name="contactRole"
+            setField={setField}
+          />
+          <li>
+            <Label>
+              <div>Preferred Campaign Point of Contact (Email)</div>
+              <Input type="email" name="email" onChange={setField} />
+            </Label>
+          </li>
+          <li>
+            <Label>
+              <div>Preferred Campaign Point of Contact (Phone Number)</div>
+              <Input type="tel" name="phone" onChange={setField} />
+            </Label>
+          </li>
+          <li>
+            <Label>
+              <div>In which political party are you currently registered?</div>
+              <Select onChange={setField} name="party">
+                <option selected="selected">Select a party</option>
+                <option value="Democratic">Democratic</option>
+                <option value="Republican">Republican</option>
+                <option value="Conservative">Conservative</option>
+                <option value="Independence">Independence</option>
+                <option value="Green">Green</option>
+                <option value="Libertarian">Libertarian</option>
+                <option value="SAM">SAM</option>
+                <option value="Working_Families_Party">Working Families Party</option>
+                <option value="Other">Other</option>
+              </Select>
+            </Label>
+          </li>
+          <FormTextInput
+            label="Name of Your Campaign Committee"
+            name="committee"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Campaign Address"
+            name="campaignAddress"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Campaign Zip"
+            name="campaignZip"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Campaign Website"
+            name="website"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Campaign Facebook"
+            name="facebook"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Campaign Twitter"
+            name="twitter"
+            setField={setField}
+          />
+          {/* TODO: make a list-able thing. Maybe should allow multiple? */}
+          <FormTextInput
+            label="Other campaign social media accounts (please list)"
+            name="socialMedia"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Name of Office you are seeking"
+            name="office"
+            setField={setField}
+          />
+          <Label>
+            <div>District Number, if applicable</div>
+            <NumberInput type="number" name="districtNumber" onChange={setField} />
+          </Label>
+          {/* TODO: Add the additional text. Does it fight in a label, or do we
+            * need a separate note? */}
+          <LinesSought
+            legend='Check all of the party lines you are seeking, including any "non-official party lines"'
+            setField={setField}
+            parties={parties}
+          />
+          <Bool
+            label="Are you an incumbent?"
+            name="incumbent"
+            setField={setField}
+          />
+          <Bool
+            label="Are you challenging an incumbent?"
+            name="challenger"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Name of incumbent (if applicable)"
+            name="incumbentName"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Name of primary opponent(s) if applicable"
+            name="primaryOpponents"
+            setField={setField}
+          />
+          <FormTextInput
+            label="Name of general election opponent(s) if applicable/known"
+            name="generalOpponents"
+            setField={setField}
+          />
+          <FormTextArea setField={setField} name="vision">
+            <div>
+              <TextAreaLabelPara>
+                Tell us about who you are and why you are running. Include your core values and
+                vision.
+              </TextAreaLabelPara>
+              <TextAreaLabelPara>
+                What are the biggest challenges facing the district you hope to repersent? What
+                needs to happen for those to be resolved?
+              </TextAreaLabelPara>
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="engagement">
+            <div>
+              How will you engage with diverse groups across the district you hope to
+              represent? Religious, ethnic, immigration status, health status, LGBTQIA+, etc.
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="priorRuns">
+            <div>Have you run for office previously? If so, please provide details.</div>
+          </FormTextArea>
+          {/* TODO: Make list */}
+          <FormTextArea setField={setField} name="endorsements">
+            <div>
+              Please list other endorsements you have earned, especially from unions, progressive
+              organizations, and progressive elected officials.
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="orgs">
+            <div>
+              What civic and political organizations are you involved with in the city?
 
-            If we called them up, what would they tell us about you?
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="friends">
-          <div>What would your best friends say about you?</div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="strength">
-          <div>What is your greatest strength and greatest weakness as a candidate?</div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="priorities">
-          <div>
-            What are your top 3 priorities or policies you hope to accomplish in this
-            term of office? Please be realistic about the scope of the office.
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="itfLove">
-          <div>Why do you want In The Fight NBK&apos;s endorsement?</div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="itfMembers" rows={5}>
-          <div>
-            Were you referred to In The Fight NBK by any of our members? (here
-            is where you name drop!)
-          </div>
-        </FormTextArea>
-        <FormTextArea setField={setField} name="justice">
-          <div>
-            <TextAreaLabelPara>
-              Are you committed to fighting for a society built on true racial,
-              economic and gender justice and equity?
-            </TextAreaLabelPara>
-            <TextAreaLabelPara>Please provide examples showing this work.</TextAreaLabelPara>
-          </div>
-        </FormTextArea>
-        <FormButtonContainer>
-          <Button text="Submit" color="purple" />
-        </FormButtonContainer>
+              If we called them up, what would they tell us about you?
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="friends">
+            <div>What would your best friends say about you?</div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="strength">
+            <div>What is your greatest strength and greatest weakness as a candidate?</div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="priorities">
+            <div>
+              What are your top 3 priorities or policies you hope to accomplish in this
+              term of office? Please be realistic about the scope of the office.
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="itfLove">
+            <div>Why do you want In The Fight NBK&apos;s endorsement?</div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="itfMembers" rows={5}>
+            <div>
+              Were you referred to In The Fight NBK by any of our members? (here
+              is where you name drop!)
+            </div>
+          </FormTextArea>
+          <FormTextArea setField={setField} name="justice">
+            <div>
+              <TextAreaLabelPara>
+                Are you committed to fighting for a society built on true racial,
+                economic and gender justice and equity?
+              </TextAreaLabelPara>
+              <TextAreaLabelPara>Please provide examples showing this work.</TextAreaLabelPara>
+            </div>
+          </FormTextArea>
+          <FormButtonContainer>
+            <Button text="Submit" color="purple" />
+          </FormButtonContainer>
+        </FormNumberedFields>
       </Form>
     </Layout>
   );

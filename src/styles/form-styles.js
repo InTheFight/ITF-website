@@ -133,7 +133,7 @@ export const Checkboxes = styled.fieldset`
 export const Legend = styled.legend`
   font-family: gelo;
   font-size: 24px;
-  margin: 10px 40px 10px 0;
+  margin: 10px 40px 10px 4px;
 `;
 
 export const RadioLabelYes = styled.label`
@@ -150,4 +150,9 @@ export const RadioLabelNo = styled.label`
 `;
 export const RadioInput = styled.input`
   width: 20px;
+`;
+
+export const FormNumberedFields = styled.ol`
+  border: none;
+  font-size: 24px;
 `;
