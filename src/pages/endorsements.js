@@ -11,6 +11,7 @@ import LinesSought from '../components/molecules/LinesSought';
 import Bool from '../components/molecules/Bool';
 import FormTextInput from '../components/atoms/FormTextInput';
 import FormTextArea from '../components/atoms/FormTextArea';
+import SubmitMsg from '../components/atoms/submitMsg'
 
 import {
   EndorsementIntro,
@@ -67,6 +68,7 @@ function contentfulize(obj) {
 
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
   const data = useStaticQuery(
     graphql`
@@ -95,6 +97,7 @@ const Endorsements = () => {
       .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)));
     /* TODO: Error handling */
     e.target.reset();
+    setSubmitted(true);
   };
 
   const setField = (event) => {
@@ -355,6 +358,10 @@ const Endorsements = () => {
             <Button text="Submit" color="purple" />
           </FormButtonContainer>
         </FormNumberedFields>
+        <SubmitMsg
+          submitted={submitted}
+          msg="Thank you! Your answers have been submitted."
+        />
       </Form>
     </Layout>
   );
