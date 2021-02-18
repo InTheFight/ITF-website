@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    FormSubmitMsg,
-    FormPresubmit
+  FormSubmitMsg,
+  FormPresubmit,
 } from '../../styles/form-styles';
 
-const SubmitMsg = ({ submitted, msg }) => {
-  return (submitted ? <FormSubmitMsg>{msg}</FormSubmitMsg> : <FormPresubmit/>);
-}
+const SubmitMsg = ({ submitted, msg }) => (
+  submitted ? <FormSubmitMsg>{msg}</FormSubmitMsg> : <FormPresubmit />
+);
 
 export default SubmitMsg;
+
 SubmitMsg.propTypes = {
   msg: PropTypes.string.isRequired,
   submitted: PropTypes.bool.isRequired,
