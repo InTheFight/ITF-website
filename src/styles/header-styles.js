@@ -11,7 +11,7 @@ const Header = styled.header`
   margin-bottom: 4rem;
 
   a.site-identity {
-    flex: 0 0 260px;
+    flex: 0 0 292px;
     display: flex;
     align-items: center;
     text-decoration: none;
