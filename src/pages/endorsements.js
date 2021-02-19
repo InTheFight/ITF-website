@@ -97,8 +97,7 @@ const Endorsements = () => {
       .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)),
         setSubmitted({ status: 'trouble' }))
       .then(e.target.reset())
-      .then(setSubmitted({ status: 'submitted' })
-           ,err => { setSubmitted({ status: 'trouble' }); console.log(err); })
+      .then(setSubmitted({ status: 'submitted' }), () => { setSubmitted({ status: 'trouble' }); });
   };
 
   const setField = (event) => {
