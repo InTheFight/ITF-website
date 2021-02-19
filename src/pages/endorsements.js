@@ -68,7 +68,7 @@ function contentfulize(obj) {
 
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState({ status: 'unsubmitted' });
 
   const data = useStaticQuery(
     graphql`
@@ -94,10 +94,11 @@ const Endorsements = () => {
     e.preventDefault();
     client.getSpace(data.site.siteMetadata.tokens.spaceId)
       .then((space) => space.getEnvironment('master'))
-      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)));
-    /* TODO: Error handling */
-    e.target.reset();
-    setSubmitted(true);
+      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)),
+        setSubmitted({ status: 'trouble' }))
+      .then(e.target.reset())
+      .then(setSubmitted({ status: 'submitted' })
+           ,err => { setSubmitted({ status: 'trouble' }); console.log(err); })
   };
 
   const setField = (event) => {
@@ -376,6 +377,7 @@ const Endorsements = () => {
         <SubmitMsg
           submitted={submitted}
           msg="Thank you! Your answers have been submitted."
+          errMsg="There was a problem submitting the form"
         />
       </Form>
     </Layout>
