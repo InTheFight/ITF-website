@@ -156,3 +156,19 @@ export const FormNumberedFields = styled.ol`
   border: none;
   font-size: 24px;
 `;
+
+export const FormSubmitMsg = styled.p`
+  font-family: urw-din;
+  font-size: 24px;
+  color: #2c358f;
+`;
+
+export const FormPresubmit = styled.p`
+  display: none;
+`;
+
+export const FormTroubleMsg = styled.p`
+  font-family: urw-din;
+  font-size: 24px;
+  color: red;
+`;

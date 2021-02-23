@@ -11,6 +11,7 @@ import LinesSought from '../components/molecules/LinesSought';
 import Bool from '../components/molecules/Bool';
 import FormTextInput from '../components/atoms/FormTextInput';
 import FormTextArea from '../components/atoms/FormTextArea';
+import SubmitMsg from '../components/atoms/submitMsg';
 
 import {
   EndorsementIntro,
@@ -67,6 +68,7 @@ function contentfulize(obj) {
 
 const Endorsements = () => {
   const [questionnaire, setQuestionnaire] = useState({});
+  const [submitted, setSubmitted] = useState({ status: 'unsubmitted' });
 
   const data = useStaticQuery(
     graphql`
@@ -92,9 +94,10 @@ const Endorsements = () => {
     e.preventDefault();
     client.getSpace(data.site.siteMetadata.tokens.spaceId)
       .then((space) => space.getEnvironment('master'))
-      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)));
-    /* TODO: Error handling */
-    e.target.reset();
+      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)),
+        setSubmitted({ status: 'trouble' }))
+      .then(e.target.reset())
+      .then(setSubmitted({ status: 'submitted' }), () => { setSubmitted({ status: 'trouble' }); });
   };
 
   const setField = (event) => {
@@ -153,6 +156,11 @@ const Endorsements = () => {
         </p>
       </EndorsementIntro>
 
+      {/* Note: Most fields in this form default to required, because that's
+        * what we usually want. This is the reverse of normal HTML, which,
+        * granted, might be a little surprising. But it's also siginificantly
+        * less code in practice. */}
+
       <Form onSubmit={handleSubmit}>
         <FormNumberedFields>
           <FormTextInput
@@ -174,16 +182,18 @@ const Endorsements = () => {
             label="Preferred Campaign Point of Contact (Name)"
             name="contactName"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Preferred Campaign Point of Contact (Role)"
             name="contactRole"
             setField={setField}
+            required={false}
           />
           <li>
             <Label>
               <div>Preferred Campaign Point of Contact (Email)</div>
-              <Input type="email" name="email" onChange={setField} />
+              <Input type="email" name="email" onChange={setField} required="true" />
             </Label>
           </li>
           <li>
@@ -218,6 +228,7 @@ const Endorsements = () => {
             label="Campaign Address"
             name="campaignAddress"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Campaign Zip"
@@ -228,22 +239,26 @@ const Endorsements = () => {
             label="Campaign Website"
             name="website"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Campaign Facebook"
             name="facebook"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Campaign Twitter"
             name="twitter"
             setField={setField}
+            required={false}
           />
           {/* TODO: make a list-able thing. Maybe should allow multiple? */}
           <FormTextInput
             label="Other campaign social media accounts (please list)"
             name="socialMedia"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Name of Office you are seeking"
@@ -275,16 +290,19 @@ const Endorsements = () => {
             label="Name of incumbent (if applicable)"
             name="incumbentName"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Name of primary opponent(s) if applicable"
             name="primaryOpponents"
             setField={setField}
+            required={false}
           />
           <FormTextInput
             label="Name of general election opponent(s) if applicable/known"
             name="generalOpponents"
             setField={setField}
+            required={false}
           />
           <FormTextArea setField={setField} name="vision">
             <div>
@@ -308,7 +326,7 @@ const Endorsements = () => {
             <div>Have you run for office previously? If so, please provide details.</div>
           </FormTextArea>
           {/* TODO: Make list */}
-          <FormTextArea setField={setField} name="endorsements">
+          <FormTextArea setField={setField} name="endorsements" required={false}>
             <div>
               Please list other endorsements you have earned, especially from unions, progressive
               organizations, and progressive elected officials.
@@ -355,6 +373,11 @@ const Endorsements = () => {
             <Button text="Submit" color="purple" />
           </FormButtonContainer>
         </FormNumberedFields>
+        <SubmitMsg
+          submitted={submitted}
+          msg="Thank you! Your answers have been submitted."
+          errMsg="There was a problem submitting the form"
+        />
       </Form>
     </Layout>
   );

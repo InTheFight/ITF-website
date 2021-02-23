@@ -7,28 +7,47 @@ import {
   RadioLabelNo,
 } from '../../styles/form-styles';
 
-const Bool = ({ name, label, setField }) => (
+const Bool = ({ name, label, setField, required }) => (
   <li>
     <Label>
       <div>{label}</div>
       <div>
         <RadioLabelYes for={`${name}_yes`}>
           <span>Yes</span>
-          <RadioInput type="radio" name={name} id={`${name}_yes`} value="yes" onChange={setField} />
+          <RadioInput
+            type="radio"
+            name={name}
+            id={`${name}_yes`}
+            value="yes"
+            onChange={setField}
+            required={required}
+          />
         </RadioLabelYes>
         <RadioLabelNo for={`${name}_no`}>
           <span>No</span>
-          <RadioInput type="radio" name={name} if={`${name}_no`} value="no" onChange={setField} />
+          <RadioInput
+            type="radio"
+            name={name}
+            id={`${name}_yes`}
+            value="yes"
+            onChange={setField}
+            required={required}
+          />
         </RadioLabelNo>
       </div>
     </Label>
   </li>
 );
 
+Bool.defaultProps = {
+  required: true,
+};
+
 export default Bool;
 
 Bool.propTypes = {
-  setField: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  required: PropTypes.bool,
+  setField: PropTypes.func.isRequired,
 };
