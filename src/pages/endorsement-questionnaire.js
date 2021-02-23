@@ -266,8 +266,10 @@ const Endorsements = () => {
             setField={setField}
           />
           <Label>
+            <li>
             <div>District Number, if applicable</div>
             <NumberInput type="number" name="districtNumber" onChange={setField} />
+            </li>
           </Label>
           {/* TODO: Add the additional text. Does it fight in a label, or do we
             * need a separate note? */}
