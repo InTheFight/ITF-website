@@ -18,4 +18,13 @@ function makeSlug(node, prefix) {
   return slg;
 }
 
+// Explicitly igonre an argument, with warnings turned off
+// Useful in promises, where we sometimes need a handler to take an argument, but
+// don't have anything in particular to do with it
+
+/* eslint-disable no-unused-vars */
+function discard(val) {}
+/* eslint-enable no-unused-vars */
+
 module.exports.makeSlug = makeSlug;
+module.exports.discard = discard;
