@@ -8,8 +8,6 @@
 ## NOTE ALSO: designed for deploying to the endorsmentes subdomain. If we're
 ## switching to deploying the main site, remember that the machine config (which
 ## isn't in this repo) nedes updating as well.
-##
-## TODO: The nix scripts don't return proper exit codes on failure. Needs fixing
 
 set -eu
 DIR=`realpath $0 | xargs dirname `
