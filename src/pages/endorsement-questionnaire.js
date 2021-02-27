@@ -75,13 +75,13 @@ const Endorsements = () => {
       query {
           site {
           siteMetadata {
-              tokens {
+            tokens {
               accessToken
               spaceId
               apiKey
-              }
+            }
           }
-          }
+        }
       }
     `,
   );
@@ -96,8 +96,15 @@ const Endorsements = () => {
       .then((space) => space.getEnvironment('master'))
       .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)),
         setSubmitted({ status: 'trouble' }))
-      .then(e.target.reset())
-      .then(setSubmitted({ status: 'submitted' }), () => { setSubmitted({ status: 'trouble' }); });
+      .then(setSubmitted({ status: 'pending' }))
+      .then((res) => {
+        if (res.fields) {
+          setSubmitted({ status: 'submitted' })
+          debugger
+        } else {
+          setSubmitted({ status: 'trouble' })
+        }
+      }, setSubmitted({ status: 'trouble' }))
   };
 
   const setField = (event) => {
@@ -377,8 +384,9 @@ const Endorsements = () => {
         </FormNumberedFields>
         <SubmitMsg
           submitted={submitted}
-          msg="Thank you! Your answers have been submitted."
+          successMsg="Thank you! Your answers have been submitted."
           errMsg="There was a problem submitting the form"
+          pendingMsg="Submitting your answer..."
         />
       </Form>
     </Layout>
