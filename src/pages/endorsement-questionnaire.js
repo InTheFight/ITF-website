@@ -12,7 +12,6 @@ import Bool from '../components/molecules/Bool';
 import FormTextInput from '../components/atoms/FormTextInput';
 import FormTextArea from '../components/atoms/FormTextArea';
 import SubmitMsg from '../components/atoms/submitMsg';
-import discard from '../lib/utils';
 
 import {
   EndorsementIntro,
@@ -93,20 +92,17 @@ const Endorsements = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.persist();
 
+    setSubmitted({ status: 'pending' });
     client.getSpace(data.site.siteMetadata.tokens.spaceId)
       .then((space) => space.getEnvironment('master'))
-      .then((environment) => {
-        setSubmitted({ status: 'pending' });
-        return environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire));
-      })
-      .then((res) => {
-        if (res.fields) {
-          setSubmitted({ status: 'submitted' });
-        } else {
-          setSubmitted({ status: 'trouble' });
-        }
-      }, (err) => { discard(err); setSubmitted({ status: 'trouble' }); });
+      .then((environment) => environment.createEntry('candidateQuestionnaires', contentfulize(questionnaire)))
+      .catch(() => setSubmitted({ status: 'trouble' }))
+      .finally(() => {
+        setSubmitted({ status: 'submitted' });
+        e.target.reset();
+      });
   };
 
   const setField = (event) => {
