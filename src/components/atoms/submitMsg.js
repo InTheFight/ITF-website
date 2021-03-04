@@ -6,11 +6,13 @@ import {
   FormPresubmit,
 } from '../../styles/form-styles';
 
-const SubmitMsg = ({ submitted, msg, errMsg }) => {
+const SubmitMsg = ({ submitted, successMsg, errMsg, pendingMsg }) => {
   if (submitted.status === 'trouble') {
     return <FormTroubleMsg>{errMsg}</FormTroubleMsg>;
+  } if (submitted.status === 'pending') {
+    return <FormSubmitMsg>{pendingMsg}</FormSubmitMsg>;
   } if (submitted.status === 'submitted') {
-    return <FormSubmitMsg>{msg}</FormSubmitMsg>;
+    return <FormSubmitMsg>{successMsg}</FormSubmitMsg>;
   }
   return <FormPresubmit />;
 };
@@ -18,7 +20,8 @@ const SubmitMsg = ({ submitted, msg, errMsg }) => {
 export default SubmitMsg;
 
 SubmitMsg.propTypes = {
-  msg: PropTypes.string.isRequired,
+  successMsg: PropTypes.string.isRequired,
+  pendingMsg: PropTypes.string.isRequired,
   errMsg: PropTypes.string.isRequired,
   submitted: PropTypes.bool.isRequired,
 };
