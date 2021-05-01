@@ -16,7 +16,7 @@ Object {
         <p
           data-testid="date-field"
         >
-          Friday, March 20, 2020
+          Friday, March 20, 2020, 12:00 AM
         </p>
       </div>
     </div>
@@ -33,7 +33,7 @@ Object {
       <p
         data-testid="date-field"
       >
-        Friday, March 20, 2020
+        Friday, March 20, 2020, 12:00 AM
       </p>
     </div>
   </div>,

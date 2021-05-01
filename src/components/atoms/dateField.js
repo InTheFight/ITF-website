@@ -21,6 +21,8 @@ const DateField = ({ date }) => {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   };
   const formattedDate = new Date(date).toLocaleDateString('en-US', options);
 
@@ -35,7 +37,7 @@ const DateField = ({ date }) => {
 };
 
 DateField.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
 };
 
 export default DateField;
