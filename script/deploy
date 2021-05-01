@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+## NOTE: Not portable!! If this works for anyone but Ben, something strange has
+## happened. We're currently deploying to a Vultr virtual machine --- the Netlify
+## continuous integration pipeline is a decoy. So this script relies on access
+## to a machine you probably don't have at the moment.
+##
+## NOTE ALSO: designed for deploying to the endorsmentes subdomain. If we're
+## switching to deploying the main site, remember that the machine config (which
+## isn't in this repo) nedes updating as well.
+
+set -eu
+DIR=`realpath $0 | xargs dirname `
+
+cd $DIR/..
+
+script/nix-npm test
+script/eslint src
+script/gatz build
+
+rsync -e ssh -a -v public/ nerid:/srv/inthefight/endorsements
+
+git tag -a "Deploy_nerid_`git branch --show-current`_`date '+%y-%m-%d_%M.H.S'`"

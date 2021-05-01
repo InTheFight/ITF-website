@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const BlueTitle = styled.h1`
+  font-family: din-condensed;
   font-weight: bold;
   font-size: 48px;
   color: #2C358F;

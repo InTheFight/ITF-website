@@ -25,6 +25,11 @@ module.exports = {
         url: '/resources',
       },
     ],
+    tokens: {
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      spaceId: process.env.SPACE_ID,
+      apiKey: process.env.CONTENTFUL_MANAGEMENT_API_KEY
+    },
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -42,6 +47,7 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
+        icon: 'src/images/logos/ITF-logo.png'
       },
     },
     {

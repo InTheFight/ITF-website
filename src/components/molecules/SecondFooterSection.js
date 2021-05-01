@@ -24,7 +24,7 @@ const Content = styled.div`
 `;
 
 const Text = styled.p`
-  font-family: 'URW DIN';
+  font-family: 'urw-din';
   font-weight: bold;
   font-size: 40px;
   color: #faf5eb;
@@ -33,7 +33,7 @@ const Text = styled.p`
 `;
 
 const Author = styled.p`
-  font-family: 'URW DIN';
+  font-family: 'urw-din';
   font-weight: 300;
   font-size: 20px;
   color: #faf5eb;

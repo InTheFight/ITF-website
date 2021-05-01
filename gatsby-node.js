@@ -6,6 +6,9 @@
 
 const { makeSlug } = require('./src/lib/utils')
 
+
+console.log("gatsby-node env" + process.env.SPACE_ID);
+
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const resourceTemplate = require.resolve(`./src/components/templates/resource.js`)
@@ -50,3 +53,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   })
 }
+
+exports.onCreateBabelConfig = ({ actions }) => {
+  if (process.env.NODE_ENV !== 'development') {
+    actions.setBabelPlugin({
+      name: '@babel/plugin-transform-regenerator',
+      options: {},
+    });
+    actions.setBabelPlugin({
+      name: '@babel/plugin-transform-runtime',
+      options: {},
+    });
+  }
+};
