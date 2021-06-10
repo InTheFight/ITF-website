@@ -26,35 +26,23 @@ const Content = styled.div`
 const Text = styled.p`
   font-family: 'urw-din';
   font-weight: bold;
-  font-size: 40px;
+  font-size: 80px;
   color: #faf5eb;
   text-transform: uppercase;
   margin-bottom: 20px;
 `;
 
-const Author = styled.p`
-  font-family: 'urw-din';
-  font-weight: 300;
-  font-size: 20px;
-  color: #faf5eb;
-`;
-
-const SecondFooterSection = ({ text, author, image }) => (
+const SecondFooterSection = ({ text, image }) => (
   <Container>
     <ImageBackground src={image} />
     <Content>
       <Text>{text}</Text>
-      <Author>
-        -
-        {author}
-      </Author>
     </Content>
   </Container>
 );
 
 SecondFooterSection.propTypes = {
   text: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
   image: PropTypes.node.isRequired,
 };
 
