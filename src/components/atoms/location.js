@@ -15,14 +15,17 @@ const LocationIcon = styled.img`
   margin: 7px 10px 0 0;
   `;
 
-const Location = ({ location, virtual }) => (
-  <LocationContainer>
-    <LocationIcon src={locationPin} alt="Location" />
-    <p data-testid="date-field">
-      {` ${virtual ? 'Virtual event' : ''} -  ${location}`}
-    </p>
-  </LocationContainer>
-);
+const Location = ({ location, virtual }) => {
+  const virtualOrLocation = virtual ? 'Virtual event' : location;
+  return (
+    <LocationContainer>
+      <LocationIcon src={locationPin} alt="Location" />
+      <p data-testid="date-field">
+        {virtualOrLocation}
+      </p>
+    </LocationContainer>
+  );
+};
 
 Location.propTypes = {
   location: PropTypes.string.isRequired,
