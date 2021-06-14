@@ -9,6 +9,7 @@ const MiddleSection = ({ sections }) => (
         image={section.image}
         title={section.title}
         text={section.text}
+        linkObj={section.linkObj}
       />
     ))}
   </div>

@@ -34,21 +34,30 @@ const IndexPage = ({ data }) => {
           sections={[
             {
               image: homeImageA,
-              title: 'Header',
-              text:
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+              title: "What's New",
+              text: '5/24 — ITF endorses a slate of progressive candidates in the upcoming local primary election.',
+              linkObj: {
+                link: '/',
+                text: 'NEWS ➝',
+              },
             },
             {
               image: homeImageB,
-              title: 'Header',
-              text:
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+              title: 'Our Story',
+              text: 'What does it mean to be In The Fight?',
+              linkObj: {
+                link: '/',
+                text: 'ABOUT ➝',
+              },
             },
             {
               image: homeImageC,
-              title: 'Header',
-              text:
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+              title: 'Upcoming Events',
+              text: 'Opportunities to learn from, engage with, and uplift our North Brooklyn community and beyond.',
+              linkObj: {
+                link: '/events',
+                text: 'EVENTS ➝',
+              },
             },
           ]}
         />
@@ -57,9 +66,7 @@ const IndexPage = ({ data }) => {
             title: 'Subscribe for updates!',
           }}
           secondContainerContent={{
-            text:
-              'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-            author: 'lorem Ipsum Author',
+            text: "YOU DON'T GET WHAT YOU DON'T FIGHT FOR",
             image: footerImage,
           }}
         />

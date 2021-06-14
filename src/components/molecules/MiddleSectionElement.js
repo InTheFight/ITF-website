@@ -1,7 +1,8 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { Link } from 'gatsby';
+import PropTypes, { string } from 'prop-types';
 
-const MiddleSectionElement = ({ imagePosition, image, title, text }) => {
+const MiddleSectionElement = ({ imagePosition, image, title, text, linkObj }) => {
   if (imagePosition === 'left') {
     return (
       <div
@@ -22,8 +23,11 @@ const MiddleSectionElement = ({ imagePosition, image, title, text }) => {
             padding: 60,
           }}
         >
-          <h2>{title}</h2>
+          <h2>
+            {title}
+          </h2>
           <p>{text}</p>
+          <Link to={linkObj.link}>{linkObj.text}</Link>
         </div>
       </div>
     );
@@ -50,6 +54,7 @@ const MiddleSectionElement = ({ imagePosition, image, title, text }) => {
       >
         <h2>{title}</h2>
         <p>{text}</p>
+        <Link to={linkObj.link}>{linkObj.text}</Link>
       </div>
       <img style={{ flex: 5, width: '100%' }} src={image} alt="Brooklyn" />
     </div>
@@ -61,6 +66,7 @@ MiddleSectionElement.propTypes = {
   image: string,
   title: string,
   text: string,
+  linkObj: PropTypes.instanceOf(Object),
 };
 
 MiddleSectionElement.defaultProps = {
@@ -68,6 +74,7 @@ MiddleSectionElement.defaultProps = {
   image: '',
   title: '',
   text: '',
+  linkObj: {},
 };
 
 export default MiddleSectionElement;

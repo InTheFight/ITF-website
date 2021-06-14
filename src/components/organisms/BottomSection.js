@@ -16,7 +16,6 @@ const BottomSection = ({ firstContainerContent, secondContainerContent }) => (
     <SecondFooterSection
       text={secondContainerContent.text}
       image={secondContainerContent.image}
-      author={secondContainerContent.author}
     />
   </StyledBottomSetion>
 
