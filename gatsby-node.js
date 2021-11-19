@@ -3,15 +3,13 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-
-const { makeSlug } = require('./src/lib/utils')
-
-
-console.log("gatsby-node env" + process.env.SPACE_ID);
+const axios = require('axios');
+const { makeSlug } = require('./src/lib/utils');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
-  const resourceTemplate = require.resolve(`./src/components/templates/resource.js`)
+  const { createPage } = actions;
+  const resourceTemplate = require.resolve(`./src/templates/resource.js`);
+  const blogPostTemplate = require.resolve(`./src/templates/blog-post.js`);
 
   // TODO would be more efficient to do one query and split, but so it goes
   const resources = await graphql(`
@@ -31,14 +29,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         }
       }
     }
-  `)
+  `);
 
   // Handle errors
   if (resources.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
   }
-
-  function resourcePaths(n) { makeSlug(n, "resources") }
 
   resources.data.allMarkdownRemark.edges.forEach(({ node }) => {
     const slug = makeSlug(node,"resources")
@@ -50,11 +46,43 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         slug: slug,
         id:   node.id,
       },
-    })
-  })
-}
+    });
+  });
 
-exports.onCreateBabelConfig = ({ actions }) => {
+  let blogPosts = [];
+  try {
+    blogPosts = await axios.get(process.env.MEDIUM_ENDPOINT);
+  } catch {
+    reporter.panicOnBuild(`Error while fetching blog posts`);
+  } finally {
+    blogPosts = blogPosts.data.items;
+    createPage({
+      path: `/blog`,
+      component:  require.resolve('./src/templates/blog-index.js'),
+      context: { blogPosts },
+    })
+
+    if (blogPosts.length > 0) {
+      blogPosts.forEach((post) => {
+        const convertToSlug = (title) => {
+          return title.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+        }
+    
+        createPage({
+          path: `/blog/${convertToSlug(post.title)}`,
+          component: blogPostTemplate,
+          context: {
+            slug: convertToSlug(post.title),
+            id:   post.guid,
+            post: post,
+          },
+        });
+      });
+    }
+  }
+};
+
+exports.onCreateBabelConfig = ({ node, actions, getNode }) => {
   if (process.env.NODE_ENV !== 'development') {
     actions.setBabelPlugin({
       name: '@babel/plugin-transform-regenerator',
@@ -65,4 +93,16 @@ exports.onCreateBabelConfig = ({ actions }) => {
       options: {},
     });
   }
-};
+
+  const { createNodeField } = actions;
+    if (node) {
+      if (node.internal.type === 'MarkdownRemark') {
+        const value = createFilePath({ node, getNode })
+        createNodeField({
+          name: 'slug',
+          node,
+          value,
+        });
+      }
+    }
+}

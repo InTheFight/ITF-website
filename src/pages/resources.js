@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 
 import { makeSlug } from '../lib/utils';
-import Layout from '../components/templates/layout';
+import Layout from '../templates/layout';
 import LinksItem from '../components/atoms/listItem';
 
 const Resources = ({ data }) => {

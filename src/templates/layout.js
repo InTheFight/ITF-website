@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
-import Footer from '../organisms/footer';
-import NavBar from '../organisms/navbar';
+import Footer from '../components/organisms/footer';
+import NavBar from '../components/organisms/navbar';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
